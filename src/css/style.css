@@ -540,7 +540,7 @@ p {
    CTA band
    ========================================================================== */
 .cta-band {
-  background: var(--blue);
+  background: linear-gradient(135deg, var(--navy) 0%, var(--blue-700) 100%);
   color: var(--white);
   text-align: center;
 }

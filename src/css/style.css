@@ -635,7 +635,7 @@ p {
 
 .about__img img {
   width: 100%;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 2 / 1;
   object-fit: cover;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow);
@@ -1059,21 +1059,37 @@ textarea.form__control {
 }
 
 /* ============================================================================
-   Scroll / load reveal
-   Content blocks fade up every time they enter the viewport. Targets are
-   tagged with [data-reveal] by reveal.js; the hidden state is gated behind
-   .reveal-ready (added by JS) so content stays visible without JS or under
-   reduced motion. A keyframe animation (not a transition) is used so it
-   replays on every reveal — every reload and each scroll back into view.
+   App-shell load fade
+   The page is assembled by JS (navbar/footer injected, text filled by i18n),
+   which would otherwise be visible as pop-in + reflow on every navigation. So
+   we keep the body hidden while it's assembled, then fade the finished page in
+   as one piece — no visible movement. Gated behind .is-loading (added by an
+   inline <head> script, JS-only) so content always shows without JS, and the
+   inline script skips it under reduced motion.
    ========================================================================== */
-@keyframes reveal-fade-up {
+html.is-loading body {
+  opacity: 0;
+}
+html.is-ready body {
+  opacity: 1;
+  transition: opacity 0.4s ease;
+}
+
+/* ============================================================================
+   Scroll reveal
+   Below-the-fold blocks fade in (opacity only — no movement) as they scroll
+   into view, and again each time they re-enter. Targets are tagged with
+   [data-reveal] by reveal.js; the hidden state is gated behind .reveal-ready
+   (added by JS) so content stays visible without JS or under reduced motion.
+   Content already on screen at load is shown by the app-shell fade above, so
+   nothing slides or reflows in the initial view.
+   ========================================================================== */
+@keyframes reveal-fade {
   from {
     opacity: 0;
-    transform: translateY(24px);
   }
   to {
     opacity: 1;
-    transform: none;
   }
 }
 
@@ -1082,14 +1098,11 @@ textarea.form__control {
   opacity: 0;
 }
 
-/* Play the fade-up each time the element is in view. `backwards` fill applies
-   the hidden start state during the stagger delay, then reverts to the
-   element's own style once the animation ends — so hover transforms (e.g.
-   .service-card:hover) work again afterwards (they're only suppressed for the
-   sub-second the animation is actually running). */
+/* Fade in each time the element scrolls into view. `backwards` fill keeps it
+   hidden through the stagger delay, then reverts to the element's own style. */
 .reveal-ready [data-reveal].is-revealed {
   opacity: 1;
-  animation: reveal-fade-up 0.6s ease backwards;
+  animation: reveal-fade 0.6s ease backwards;
   animation-delay: calc(var(--reveal-i, 0) * 90ms);
 }
 

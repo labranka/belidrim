@@ -1,12 +1,14 @@
-// Scroll/load reveal: content blocks fade up when they enter the viewport —
-// on first load, on every reload, on bfcache restore, and again each time they
-// are scrolled back into view. No dependencies.
+// Scroll reveal: blocks that start BELOW the fold fade in (opacity only — no
+// movement) as they scroll into view, and again each time they re-enter.
+// Content already on screen at load is left untouched — the app-shell fade
+// (see .is-loading/.is-ready in main.js + CSS) shows it as one piece, so the
+// initial view never slides or reflows. No dependencies.
 //
 // Targets are tagged with [data-reveal] from JS, and the hidden state lives
 // behind the .reveal-ready class on <html> — added only here. So with JS
 // disabled or under prefers-reduced-motion, nothing is ever hidden.
 
-// Block-level elements that fade up as a single unit.
+// Block-level elements that fade in as a single unit.
 const BLOCK_SELECTORS = [
   '.hero__content',
   '.page-hero',
@@ -27,20 +29,26 @@ const GROUP_SELECTORS = ['.stats', '.services__grid', '.values__grid', '.positio
 
 const targets = [];
 let observer = null;
-// The observer's very first batch reports the initial scroll position. We treat
-// it specially so a reload mid-page doesn't hide content above the fold.
-let firstPass = true;
+
+// Only manage elements that start below the fold; on-screen ones are shown by
+// the app-shell fade. Measured here (after i18n has filled text, so layout is
+// final). opacity doesn't affect geometry, so the page fade being active is fine.
+function isBelowFold(el) {
+  return el.getBoundingClientRect().top >= window.innerHeight;
+}
 
 function tagTargets() {
   document.querySelectorAll(BLOCK_SELECTORS.join(',')).forEach((el) => {
+    if (!isBelowFold(el)) return;
     el.setAttribute('data-reveal', '');
     targets.push(el);
   });
 
   document.querySelectorAll(GROUP_SELECTORS.join(',')).forEach((group) => {
     Array.from(group.children).forEach((child, i) => {
-      child.setAttribute('data-reveal', '');
       child.style.setProperty('--reveal-i', i); // stagger within the group
+      if (!isBelowFold(child)) return;
+      child.setAttribute('data-reveal', '');
       targets.push(child);
     });
   });
@@ -48,21 +56,9 @@ function tagTargets() {
 
 function onIntersect(entries) {
   entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      // In view → fade up. Re-adding the class restarts the keyframe animation,
-      // so this replays every time the element scrolls back into view.
-      entry.target.classList.add('is-revealed');
-    } else if (firstPass && entry.boundingClientRect.bottom <= 0) {
-      // Already scrolled past at load/restore: show it (no animation — it's
-      // off-screen) so a mid-page reload never strands content above the fold.
-      entry.target.classList.add('is-revealed');
-    } else {
-      // Below the fold, or scrolled away after load → reset to hidden so it
-      // animates the next time it enters the viewport.
-      entry.target.classList.remove('is-revealed');
-    }
+    // Toggle so the fade replays every time the element scrolls back into view.
+    entry.target.classList.toggle('is-revealed', entry.isIntersecting);
   });
-  firstPass = false;
 }
 
 export function initReveal() {
@@ -105,7 +101,6 @@ export function initReveal() {
   // re-running this module, so replay the reveal whenever that happens.
   window.addEventListener('pageshow', (e) => {
     if (!e.persisted || !observer) return;
-    firstPass = true;
     targets.forEach((el) => {
       observer.unobserve(el);
       el.classList.remove('is-revealed');

@@ -1057,6 +1057,41 @@ textarea.form__control {
 }
 
 /* ============================================================================
+   Scroll / load reveal
+   Content blocks fade up every time they enter the viewport. Targets are
+   tagged with [data-reveal] by reveal.js; the hidden state is gated behind
+   .reveal-ready (added by JS) so content stays visible without JS or under
+   reduced motion. A keyframe animation (not a transition) is used so it
+   replays on every reveal — every reload and each scroll back into view.
+   ========================================================================== */
+@keyframes reveal-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Holding state for anything not currently revealed (off-screen or pre-reveal). */
+.reveal-ready [data-reveal] {
+  opacity: 0;
+}
+
+/* Play the fade-up each time the element is in view. `backwards` fill applies
+   the hidden start state during the stagger delay, then reverts to the
+   element's own style once the animation ends — so hover transforms (e.g.
+   .service-card:hover) work again afterwards (they're only suppressed for the
+   sub-second the animation is actually running). */
+.reveal-ready [data-reveal].is-revealed {
+  opacity: 1;
+  animation: reveal-fade-up 0.6s ease backwards;
+  animation-delay: calc(var(--reveal-i, 0) * 90ms);
+}
+
+/* ============================================================================
    Reduced motion
    ========================================================================== */
 @media (prefers-reduced-motion: reduce) {
@@ -1064,6 +1099,11 @@ textarea.form__control {
     animation: none !important;
     transition: none !important;
     scroll-behavior: auto !important;
+  }
+  /* Never leave a reveal target stuck hidden if it was somehow tagged. */
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
 

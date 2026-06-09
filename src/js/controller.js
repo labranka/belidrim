@@ -2,6 +2,8 @@
 // started when a .slider element is present on the page.
 class Slider {
   constructor(root) {
+    this.root = root;
+    this.viewport = root.querySelector('.slider__viewport') || root;
     this.slides = root.querySelectorAll('.slide');
     this.btnLeft = root.querySelector('.slider__btn--left');
     this.btnRight = root.querySelector('.slider__btn--right');
@@ -13,6 +15,7 @@ class Slider {
     this.createDots();
     this.init();
     this.addEventListeners();
+    this.addSwipe();
   }
 
   createDots() {
@@ -74,6 +77,41 @@ class Slider {
       this.goToSlide(slide);
       this.activateDot(slide);
     });
+  }
+
+  // Touch / mouse / pen swipe via Pointer Events. A horizontal drag past the
+  // threshold changes slide; vertical gestures fall through to page scroll.
+  addSwipe() {
+    const THRESHOLD = 50; // px the pointer must travel to count as a swipe
+    let startX = 0;
+    let startY = 0;
+    let dragging = false;
+
+    this.viewport.addEventListener('pointerdown', (e) => {
+      // Let the arrows and dots handle their own clicks.
+      if (e.target.closest('.slider__btn') || e.target.closest('.dots')) return;
+      dragging = true;
+      startX = e.clientX;
+      startY = e.clientY;
+      // Keep receiving move/up even if the pointer leaves the viewport.
+      if (this.viewport.setPointerCapture) {
+        this.viewport.setPointerCapture(e.pointerId);
+      }
+    });
+
+    this.viewport.addEventListener('pointerup', (e) => {
+      if (!dragging) return;
+      dragging = false;
+      const dx = e.clientX - startX;
+      const dy = e.clientY - startY;
+      // Only act on a mostly-horizontal drag so vertical scrolling still works.
+      if (Math.abs(dx) > THRESHOLD && Math.abs(dx) > Math.abs(dy)) {
+        if (dx < 0) this.nextSlide();
+        else this.prevSlide();
+      }
+    });
+
+    this.viewport.addEventListener('pointercancel', () => (dragging = false));
   }
 }
 

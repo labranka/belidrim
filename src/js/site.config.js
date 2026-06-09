@@ -10,10 +10,10 @@ export const site = {
   phoneDisplay: '+381 63 000 0000', // [PLACEHOLDER] e.g. +381 63 123 4567
   phoneHref: '+38163000000', // [PLACEHOLDER] same number, digits only, with country code
   email: 'info@belidrim.rs', // [PLACEHOLDER]
-  address: 'Ulica bb, Mesto, Srbija', // [PLACEHOLDER] full street address
+  address: 'IV Crnogorska 30g, Kraljevo, Srbija', // full street address
 
   // Map: no API key needed. Put the same address (or a Google Maps "place" query) here.
-  mapQuery: 'Srbija', // [PLACEHOLDER] e.g. 'Kralja Petra 1, Beograd, Srbija'
+  mapQuery: 'IV Crnogorska 30g, Kraljevo, Srbija',
 
   // Social links — leave '' to hide the icon.
   social: {

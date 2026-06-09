@@ -647,7 +647,7 @@ p {
    Gallery slider
    ========================================================================== */
 .slider {
-  max-width: 900px;
+  max-width: 500px;
   margin: 0 auto;
   position: relative;
   border-radius: var(--radius-lg);
@@ -658,13 +658,23 @@ p {
 .slider__viewport {
   position: relative;
   width: 100%;
-  height: 260px;
+  /* Most gallery photos are 3:4 portrait — match that so they fill the frame
+     without cropping. The few landscape shots are cropped via object-fit. */
+  aspect-ratio: 3 / 4;
 }
 
 .slide {
   position: absolute;
   inset: 0;
+  /* Default (pre-JS) state: every slide sits just off the right edge so only
+     the first slide is visible on load/refresh. JS overrides via inline
+     transform once initSlider() runs. */
+  transform: translateX(100%);
   transition: transform 0.7s ease;
+}
+
+.slide:first-child {
+  transform: translateX(0);
 }
 
 .slide > img {
@@ -679,27 +689,54 @@ p {
   transform: translateY(-50%);
   z-index: 10;
   border: none;
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.9);
   color: var(--navy);
   border-radius: 50%;
-  height: 3rem;
-  width: 3rem;
-  font-size: 1.6rem;
-  line-height: 1;
+  height: 2.75rem;
+  width: 2.75rem;
+  padding: 0;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.2s;
+  box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease,
+    transform 0.2s ease;
 }
+
+.slider__btn svg {
+  width: 1.4rem;
+  height: 1.4rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.25;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
 .slider__btn:hover {
-  background: var(--white);
+  background: var(--accent);
+  color: var(--white);
+  box-shadow: var(--shadow);
+  transform: translateY(-50%) scale(1.08);
 }
+
+.slider__btn:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.slider__btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
 .slider__btn--left {
-  left: 0.75rem;
+  left: 0.9rem;
 }
 .slider__btn--right {
-  right: 0.75rem;
+  right: 0.9rem;
 }
 
 .dots {
@@ -994,9 +1031,6 @@ textarea.form__control {
   .values__grid {
     grid-template-columns: repeat(2, 1fr);
   }
-  .slider__viewport {
-    height: 420px;
-  }
   .hero__inner {
     padding: calc(var(--header-h) + 3.5rem) 1.25rem 5rem;
   }
@@ -1094,10 +1128,6 @@ textarea.form__control {
   .footer__container {
     grid-template-columns: 1.5fr 1fr 1.2fr auto;
     gap: 2.5rem;
-  }
-
-  .slider__viewport {
-    height: 500px;
   }
 }
 

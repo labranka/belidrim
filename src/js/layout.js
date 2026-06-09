@@ -122,31 +122,39 @@ function renderFooter() {
 }
 
 function initMobileMenu() {
+  const navbar = document.querySelector('.navbar');
   const toggle = document.querySelector('#mobile-menu');
   const menu = document.querySelector('#primary-menu');
-  if (!toggle || !menu) return;
+  if (!navbar || !toggle || !menu) return;
 
-  const close = () => {
-    toggle.classList.remove('is-active');
-    menu.classList.remove('is-open');
-    toggle.setAttribute('aria-expanded', 'false');
-    document.documentElement.style.overflow = '';
-  };
-
-  toggle.addEventListener('click', () => {
-    const open = menu.classList.toggle('is-open');
+  const setOpen = (open) => {
+    menu.classList.toggle('is-open', open);
     toggle.classList.toggle('is-active', open);
+    navbar.classList.toggle('is-menu-open', open);
     toggle.setAttribute('aria-expanded', String(open));
     document.documentElement.style.overflow = open ? 'hidden' : '';
-  });
+  };
+
+  toggle.addEventListener('click', () =>
+    setOpen(!menu.classList.contains('is-open'))
+  );
 
   // Close the menu after navigating or resizing to desktop.
   menu.querySelectorAll('.navbar__link').forEach((l) =>
-    l.addEventListener('click', close)
+    l.addEventListener('click', () => setOpen(false))
   );
   window.addEventListener('resize', () => {
-    if (window.innerWidth > 900) close();
+    if (window.innerWidth > 900) setOpen(false);
   });
+}
+
+// Make the transparent navbar turn solid once the user scrolls past the top.
+function initNavScroll() {
+  const navbar = document.querySelector('.navbar');
+  if (!navbar) return;
+  const update = () => navbar.classList.toggle('is-scrolled', window.scrollY > 30);
+  update();
+  window.addEventListener('scroll', update, { passive: true });
 }
 
 // Injects header + footer and wires the mobile menu. Translation is applied
@@ -157,4 +165,5 @@ export function renderLayout() {
   if (header) header.innerHTML = renderHeader();
   if (footer) footer.innerHTML = renderFooter();
   initMobileMenu();
+  initNavScroll();
 }

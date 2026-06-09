@@ -14,6 +14,7 @@ export const translations = {
     // --- Hero (home) ---
     'hero.eyebrow': 'BELI DRIM 2014 DOO',
     'hero.title': 'Transport bez stresa',
+    'hero.tagline': 'Transport bez stresa',
     'hero.subtitle':
       'Pouzdan i siguran prevoz robe u Srbiji i regionu — sopstveni vozni park i dugogodišnje iskustvo.',
     'hero.ctaPrimary': 'Zatražite ponudu',
@@ -139,6 +140,7 @@ export const translations = {
     // --- Hero (home) ---
     'hero.eyebrow': 'BELI DRIM 2014 DOO',
     'hero.title': 'Transport without the stress',
+    'hero.tagline': 'Stress-free transport',
     'hero.subtitle':
       'Reliable and safe freight transport in Serbia and the region — our own fleet and years of experience.',
     'hero.ctaPrimary': 'Request a quote',

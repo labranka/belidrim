@@ -201,11 +201,32 @@ p {
    Navbar
    ========================================================================== */
 .navbar {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 1000;
+  background: transparent;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Solid state — when scrolled past the hero, or while the mobile menu is open */
+.navbar.is-scrolled,
+.navbar.is-menu-open {
   background: var(--white);
   box-shadow: var(--shadow-sm);
+}
+
+.navbar__logo img {
+  transition: filter 0.25s ease;
+}
+
+/* Transparent state (top of page, menu closed): white logo + hamburger */
+.navbar:not(.is-scrolled):not(.is-menu-open) .navbar__logo img {
+  filter: brightness(0) invert(1);
+}
+.navbar:not(.is-scrolled):not(.is-menu-open) .navbar__toggle .bar {
+  background: var(--white);
 }
 
 .navbar__container {
@@ -338,6 +359,9 @@ p {
    ========================================================================== */
 .hero {
   position: relative;
+  display: flex;
+  align-items: center;
+  min-height: clamp(560px, 90vh, 820px);
   color: var(--white);
   background: var(--navy);
   isolation: isolate;
@@ -365,9 +389,10 @@ p {
 }
 
 .hero__inner {
+  width: 100%;
   max-width: var(--container);
   margin: 0 auto;
-  padding: 4rem 1.25rem 4.5rem;
+  padding: calc(var(--header-h) + 2.5rem) 1.25rem 3.5rem;
 }
 
 .hero__content {
@@ -380,7 +405,15 @@ p {
 
 .hero__title {
   color: var(--white);
-  font-size: clamp(2.1rem, 8vw, 3.6rem);
+  font-size: clamp(2.4rem, 9vw, 4.2rem);
+  letter-spacing: -0.01em;
+  margin-bottom: 0.5rem;
+}
+
+.hero__tagline {
+  font-size: clamp(1.25rem, 4.5vw, 1.9rem);
+  font-weight: 700;
+  color: var(--accent);
   margin-bottom: 1rem;
 }
 
@@ -540,7 +573,7 @@ p {
   background: var(--navy);
   color: var(--white);
   text-align: center;
-  padding: 3rem 1.25rem;
+  padding: calc(var(--header-h) + 3rem) 1.25rem 3rem;
 }
 
 .page-hero .eyebrow {
@@ -971,7 +1004,7 @@ textarea.form__control {
     height: 420px;
   }
   .hero__inner {
-    padding: 5.5rem 1.25rem 6rem;
+    padding: calc(var(--header-h) + 3.5rem) 1.25rem 5rem;
   }
 }
 
@@ -1016,6 +1049,26 @@ textarea.form__control {
   }
   .navbar__link.is-active {
     color: var(--blue);
+  }
+
+  /* Transparent navbar over the dark hero — light text on desktop */
+  .navbar:not(.is-scrolled) .navbar__link {
+    color: rgba(255, 255, 255, 0.92);
+  }
+  .navbar:not(.is-scrolled) .navbar__link:hover,
+  .navbar:not(.is-scrolled) .navbar__link.is-active {
+    color: var(--white);
+  }
+  .navbar:not(.is-scrolled) .lang-switch {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+  .navbar:not(.is-scrolled) .lang-switch__btn {
+    color: rgba(255, 255, 255, 0.85);
+  }
+  .navbar:not(.is-scrolled) .lang-switch__btn.is-active {
+    background: var(--white);
+    color: var(--navy);
   }
 
   .navbar__actions {

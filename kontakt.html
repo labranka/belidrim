@@ -9,10 +9,37 @@
       content="Kontaktirajte Beli Drim 2014 DOO — telefon, email, adresa i mapa. Zatražite ponudu za transport robe u Srbiji i regionu."
     />
     <meta name="theme-color" content="#0d2440" />
+    <link rel="canonical" href="https://labranka.github.io/belidrim/kontakt.html" />
+
+    <!-- Icons / PWA -->
+    <link rel="icon" href="src/img/favicon.ico" sizes="48x48" />
     <link rel="icon" href="src/img/logoBD.svg" type="image/svg+xml" />
+    <link rel="icon" type="image/png" sizes="32x32" href="src/img/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="src/img/favicon-16.png" />
+    <link rel="apple-touch-icon" href="src/img/apple-touch-icon.png" />
+    <link rel="manifest" href="site.webmanifest" />
+
+    <!-- Open Graph / social -->
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Beli Drim 2014 DOO" />
+    <meta property="og:locale" content="sr_RS" />
+    <meta property="og:url" content="https://labranka.github.io/belidrim/kontakt.html" />
     <meta property="og:title" content="Kontakt — Beli Drim 2014 DOO" />
-    <meta property="og:image" content="src/img/highway.jpg" />
+    <meta
+      property="og:description"
+      content="Kontaktirajte Beli Drim 2014 DOO — telefon, email, adresa i mapa. Zatražite ponudu za transport robe u Srbiji i regionu."
+    />
+    <meta property="og:image" content="https://labranka.github.io/belidrim/src/img/highway.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="900" />
+    <meta property="og:image:alt" content="Kamion Beli Drim na autoputu" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Kontakt — Beli Drim 2014 DOO" />
+    <meta
+      name="twitter:description"
+      content="Telefon, email, adresa i mapa. Zatražite ponudu za transport robe."
+    />
+    <meta name="twitter:image" content="https://labranka.github.io/belidrim/src/img/highway.jpg" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -20,16 +47,16 @@
       href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="src/css/style.css" />
-    <script type="module" src="src/js/main.js"></script>
+    <link rel="stylesheet" href="src/css/style.css?v=2.1.0" />
+    <script type="module" src="src/js/main.js?v=2.1.0"></script>
   </head>
   <body>
     <header id="site-header"></header>
 
-    <main>
+    <main id="main">
       <section class="page-hero">
         <span class="eyebrow" data-i18n="contact.eyebrow"></span>
-        <h1 data-i18n="contact.title"></h1>
+        <h1 data-i18n="contact.title">Kontaktirajte nas</h1>
         <p data-i18n="contact.intro"></p>
       </section>
 
@@ -43,18 +70,28 @@
                 <iframe
                   id="contact-map"
                   title="Mapa — Beli Drim 2014 DOO"
+                  src="https://maps.google.com/maps?q=IV%20Crnogorska%2030g%2C%20Kraljevo%2C%20Srbija&z=13&output=embed"
                   loading="lazy"
                   referrerpolicy="no-referrer-when-downgrade"
+                  sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
                 ></iframe>
+                <noscript>
+                  <a
+                    href="https://maps.google.com/maps?q=IV%20Crnogorska%2030g%2C%20Kraljevo%2C%20Srbija"
+                    target="_blank"
+                    rel="noopener"
+                    >Otvori mapu u Google Maps</a
+                  >
+                </noscript>
               </div>
             </div>
 
             <!-- Contact form -->
             <div class="form-card">
               <h2 class="section__title" data-i18n="contact.formTitle"></h2>
-              <form class="js-form" novalidate>
+              <form class="js-form">
                 <input type="hidden" name="subject" value="Nova poruka sa Beli Drim sajta" />
-                <input type="checkbox" name="botcheck" class="form__hp" tabindex="-1" autocomplete="off" />
+                <input type="checkbox" name="botcheck" class="form__hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
 
                 <div class="form__group">
                   <label class="form__label" for="k-name" data-i18n="form.name"></label>

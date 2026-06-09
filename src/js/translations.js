@@ -11,9 +11,15 @@ export const translations = {
     'nav.cta': 'Zatražite ponudu',
     'lang.toggleLabel': 'Promeni jezik',
 
+    // --- Accessibility / 404 ---
+    'a11y.skip': 'Pređi na sadržaj',
+    'a11y.gallery': 'Galerija vozila',
+    'notFound.title': 'Stranica nije pronađena',
+    'notFound.text':
+      'Žao nam je, tražena stranica ne postoji ili je premeštena.',
+    'notFound.back': 'Nazad na početnu',
+
     // --- Hero (home) ---
-    'hero.eyebrow': 'BELI DRIM 2014 DOO',
-    'hero.title': 'Transport bez stresa',
     'hero.tagline': 'Transport bez stresa',
     'hero.subtitle':
       'Pouzdan i siguran prevoz robe u Srbiji i regionu — sopstveni vozni park i dugogodišnje iskustvo.',
@@ -105,7 +111,6 @@ export const translations = {
     'contact.hoursLabel': 'Radno vreme',
     'contact.hoursValue': 'Ponedeljak – Petak: 08–16h',
     'contact.formTitle': 'Pošaljite nam poruku',
-    'contact.mapTitle': 'Gde se nalazimo',
 
     // --- Forms ---
     'form.name': 'Ime i prezime',
@@ -137,9 +142,15 @@ export const translations = {
     'nav.cta': 'Request a quote',
     'lang.toggleLabel': 'Change language',
 
+    // --- Accessibility / 404 ---
+    'a11y.skip': 'Skip to content',
+    'a11y.gallery': 'Vehicle gallery',
+    'notFound.title': 'Page not found',
+    'notFound.text':
+      "Sorry, the page you're looking for doesn't exist or has moved.",
+    'notFound.back': 'Back to home',
+
     // --- Hero (home) ---
-    'hero.eyebrow': 'BELI DRIM 2014 DOO',
-    'hero.title': 'Transport without the stress',
     'hero.tagline': 'Stress-free transport',
     'hero.subtitle':
       'Reliable and safe freight transport in Serbia and the region — our own fleet and years of experience.',
@@ -229,7 +240,6 @@ export const translations = {
     'contact.hoursLabel': 'Working hours',
     'contact.hoursValue': 'Monday – Friday: 8 am – 4 pm',
     'contact.formTitle': 'Send us a message',
-    'contact.mapTitle': 'Where to find us',
 
     // --- Forms ---
     'form.name': 'Full name',

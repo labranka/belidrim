@@ -19,10 +19,11 @@ class Slider {
   }
 
   createDots() {
+    if (!this.dotContainer) return;
     this.slides.forEach((_, i) => {
       this.dotContainer.insertAdjacentHTML(
         'beforeend',
-        `<button class="dots__dot" data-slide="${i}" aria-label="Slide ${i + 1}"></button>`
+        `<button class="dots__dot" type="button" data-slide="${i}" aria-label="Slika ${i + 1}"></button>`
       );
     });
   }
@@ -34,13 +35,13 @@ class Slider {
   }
 
   activateDot(slide) {
-    this.dotContainer
-      .querySelectorAll('.dots__dot')
-      .forEach((dot) => dot.classList.remove('dots__dot--active'));
-    const active = this.dotContainer.querySelector(
-      `.dots__dot[data-slide="${slide}"]`
-    );
-    if (active) active.classList.add('dots__dot--active');
+    if (!this.dotContainer) return;
+    this.dotContainer.querySelectorAll('.dots__dot').forEach((dot) => {
+      const isActive = dot.dataset.slide === String(slide);
+      dot.classList.toggle('dots__dot--active', isActive);
+      if (isActive) dot.setAttribute('aria-current', 'true');
+      else dot.removeAttribute('aria-current');
+    });
   }
 
   nextSlide() {
@@ -61,19 +62,26 @@ class Slider {
   }
 
   addEventListeners() {
-    this.btnRight.addEventListener('click', () => this.nextSlide());
-    this.btnLeft.addEventListener('click', () => this.prevSlide());
+    this.btnRight?.addEventListener('click', () => this.nextSlide());
+    this.btnLeft?.addEventListener('click', () => this.prevSlide());
 
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowLeft') this.prevSlide();
-      if (e.key === 'ArrowRight') this.nextSlide();
+    // Scope arrow keys to the slider (it is focusable via tabindex="0") so they
+    // don't hijack page scrolling or form-field caret movement elsewhere.
+    this.root.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        this.prevSlide();
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        this.nextSlide();
+      }
     });
 
-    this.dotContainer.addEventListener('click', (e) => {
+    this.dotContainer?.addEventListener('click', (e) => {
       const dot = e.target.closest('.dots__dot');
       if (!dot) return;
-      const { slide } = dot.dataset;
-      this.curSlide = Number(slide);
+      const slide = Number(dot.dataset.slide);
+      this.curSlide = slide;
       this.goToSlide(slide);
       this.activateDot(slide);
     });
@@ -117,5 +125,5 @@ class Slider {
 
 export function initSlider() {
   const root = document.querySelector('.slider');
-  if (root) new Slider(root);
+  if (root && root.querySelectorAll('.slide').length) new Slider(root);
 }

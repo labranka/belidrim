@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://labranka.github.io/belidrim/sitemap.xml

@@ -9,10 +9,37 @@
       content="Galerija voznog parka Beli Drim 2014 DOO — pogledajte našu flotu savremenih vozila za transport robe."
     />
     <meta name="theme-color" content="#0d2440" />
+    <link rel="canonical" href="https://labranka.github.io/belidrim/gallery.html" />
+
+    <!-- Icons / PWA -->
+    <link rel="icon" href="src/img/favicon.ico" sizes="48x48" />
     <link rel="icon" href="src/img/logoBD.svg" type="image/svg+xml" />
+    <link rel="icon" type="image/png" sizes="32x32" href="src/img/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="src/img/favicon-16.png" />
+    <link rel="apple-touch-icon" href="src/img/apple-touch-icon.png" />
+    <link rel="manifest" href="site.webmanifest" />
+
+    <!-- Open Graph / social -->
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Beli Drim 2014 DOO" />
+    <meta property="og:locale" content="sr_RS" />
+    <meta property="og:url" content="https://labranka.github.io/belidrim/gallery.html" />
     <meta property="og:title" content="Galerija — Beli Drim 2014 DOO" />
-    <meta property="og:image" content="src/img/bd1.jpg" />
+    <meta
+      property="og:description"
+      content="Galerija voznog parka Beli Drim 2014 DOO — pogledajte našu flotu savremenih vozila za transport robe."
+    />
+    <meta property="og:image" content="https://labranka.github.io/belidrim/src/img/truck2.jpg" />
+    <meta property="og:image:width" content="1600" />
+    <meta property="og:image:height" content="1066" />
+    <meta property="og:image:alt" content="Vozni park Beli Drim 2014" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Galerija — Beli Drim 2014 DOO" />
+    <meta
+      name="twitter:description"
+      content="Pogledajte našu flotu savremenih vozila za transport robe."
+    />
+    <meta name="twitter:image" content="https://labranka.github.io/belidrim/src/img/truck2.jpg" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -20,34 +47,106 @@
       href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="src/css/style.css" />
-    <script type="module" src="src/js/main.js"></script>
+    <link rel="stylesheet" href="src/css/style.css?v=2.1.0" />
+    <script type="module" src="src/js/main.js?v=2.1.0"></script>
   </head>
   <body>
     <header id="site-header"></header>
 
-    <main>
+    <main id="main">
       <section class="page-hero">
         <span class="eyebrow" data-i18n="gallery.eyebrow"></span>
-        <h1 data-i18n="gallery.title"></h1>
+        <h1 data-i18n="gallery.title">Naš vozni park</h1>
         <p data-i18n="gallery.intro"></p>
       </section>
 
       <section class="section">
         <div class="container">
-          <div class="slider">
+          <div
+            class="slider"
+            role="group"
+            aria-roledescription="carousel"
+            data-i18n-aria="a11y.gallery"
+            tabindex="0"
+          >
             <div class="slider__viewport">
-              <div class="slide"><img src="src/img/truck1.jpg" alt="Kamion Beli Drim" /></div>
-              <div class="slide"><img src="src/img/bd1.jpg" alt="Vozni park 1" loading="lazy" /></div>
-              <div class="slide"><img src="src/img/bd2.jpg" alt="Vozni park 2" loading="lazy" /></div>
-              <div class="slide"><img src="src/img/bd3.jpg" alt="Vozni park 3" loading="lazy" /></div>
-              <div class="slide"><img src="src/img/bd4.jpg" alt="Vozni park 4" loading="lazy" /></div>
-              <div class="slide"><img src="src/img/bd5.jpg" alt="Vozni park 5" loading="lazy" /></div>
-              <div class="slide"><img src="src/img/bd6.jpg" alt="Vozni park 6" loading="lazy" /></div>
-              <div class="slide"><img src="src/img/bd7.jpg" alt="Vozni park 7" loading="lazy" /></div>
-              <div class="slide"><img src="src/img/bd8.jpg" alt="Vozni park 8" loading="lazy" /></div>
-              <div class="slide"><img src="src/img/bd9.jpg" alt="Vozni park 9" loading="lazy" /></div>
-              <div class="slide"><img src="src/img/bd10.jpg" alt="Vozni park 10" loading="lazy" /></div>
+              <div class="slide">
+                <picture>
+                  <source type="image/avif" srcset="src/img/truck1.avif" />
+                  <source type="image/webp" srcset="src/img/truck1.webp" />
+                  <img src="src/img/truck1.jpg" alt="Beli Drim kamion na otvorenom putu" width="1200" height="800" fetchpriority="high" />
+                </picture>
+              </div>
+              <div class="slide">
+                <picture>
+                  <source type="image/avif" srcset="src/img/bd1.avif" />
+                  <source type="image/webp" srcset="src/img/bd1.webp" />
+                  <img src="src/img/bd1.jpg" alt="Šleper Beli Drim u voznom parku" width="1000" height="1333" loading="lazy" />
+                </picture>
+              </div>
+              <div class="slide">
+                <picture>
+                  <source type="image/avif" srcset="src/img/bd2.avif" />
+                  <source type="image/webp" srcset="src/img/bd2.webp" />
+                  <img src="src/img/bd2.jpg" alt="Kamion Beli Drim spreman za utovar" width="1000" height="1334" loading="lazy" />
+                </picture>
+              </div>
+              <div class="slide">
+                <picture>
+                  <source type="image/avif" srcset="src/img/bd3.avif" />
+                  <source type="image/webp" srcset="src/img/bd3.webp" />
+                  <img src="src/img/bd3.jpg" alt="Vozilo Beli Drim na međunarodnoj ruti" width="1000" height="1334" loading="lazy" />
+                </picture>
+              </div>
+              <div class="slide">
+                <picture>
+                  <source type="image/avif" srcset="src/img/bd4.avif" />
+                  <source type="image/webp" srcset="src/img/bd4.webp" />
+                  <img src="src/img/bd4.jpg" alt="Kamion iz voznog parka Beli Drim" width="768" height="1376" loading="lazy" />
+                </picture>
+              </div>
+              <div class="slide">
+                <picture>
+                  <source type="image/avif" srcset="src/img/bd5.avif" />
+                  <source type="image/webp" srcset="src/img/bd5.webp" />
+                  <img src="src/img/bd5.jpg" alt="Teretno vozilo Beli Drim" width="1000" height="1333" loading="lazy" />
+                </picture>
+              </div>
+              <div class="slide">
+                <picture>
+                  <source type="image/avif" srcset="src/img/bd6.avif" />
+                  <source type="image/webp" srcset="src/img/bd6.webp" />
+                  <img src="src/img/bd6.jpg" alt="Šleper Beli Drim tokom transporta" width="768" height="1376" loading="lazy" />
+                </picture>
+              </div>
+              <div class="slide">
+                <picture>
+                  <source type="image/avif" srcset="src/img/bd7.avif" />
+                  <source type="image/webp" srcset="src/img/bd7.webp" />
+                  <img src="src/img/bd7.jpg" alt="Kamion Beli Drim na parkingu" width="1000" height="1250" loading="lazy" />
+                </picture>
+              </div>
+              <div class="slide">
+                <picture>
+                  <source type="image/avif" srcset="src/img/bd8.avif" />
+                  <source type="image/webp" srcset="src/img/bd8.webp" />
+                  <img src="src/img/bd8.jpg" alt="Vozilo Beli Drim u domaćem transportu" width="1000" height="1333" loading="lazy" />
+                </picture>
+              </div>
+              <div class="slide">
+                <picture>
+                  <source type="image/avif" srcset="src/img/bd9.avif" />
+                  <source type="image/webp" srcset="src/img/bd9.webp" />
+                  <img src="src/img/bd9.jpg" alt="Kamion Beli Drim spreman za polazak" width="896" height="1027" loading="lazy" />
+                </picture>
+              </div>
+              <div class="slide">
+                <picture>
+                  <source type="image/avif" srcset="src/img/bd10.avif" />
+                  <source type="image/webp" srcset="src/img/bd10.webp" />
+                  <img src="src/img/bd10.jpg" alt="Vozni park Beli Drim 2014" width="1000" height="750" loading="lazy" />
+                </picture>
+              </div>
             </div>
             <button class="slider__btn slider__btn--left" aria-label="Prethodna slika">
               <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="15 5 8 12 15 19" /></svg>

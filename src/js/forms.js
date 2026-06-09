@@ -10,6 +10,25 @@ async function handleSubmit(form) {
   const submitBtn = form.querySelector('button[type="submit"]');
   const originalLabel = submitBtn ? submitBtn.textContent : '';
 
+  // Native HTML5 validation (forms no longer carry novalidate). Belt-and-suspenders.
+  if (typeof form.checkValidity === 'function' && !form.checkValidity()) {
+    form.reportValidity();
+    return;
+  }
+
+  // Guard: if the Web3Forms key was never set, fail loudly for the developer
+  // instead of silently for the user after a pointless network round-trip.
+  if (!site.web3formsKey || site.web3formsKey === 'YOUR_WEB3FORMS_ACCESS_KEY') {
+    console.warn(
+      '[forms] Web3Forms access key is not set in src/js/site.config.js — submissions will not be delivered.'
+    );
+    if (status) {
+      status.textContent = t('form.error');
+      status.className = 'form__status is-error';
+    }
+    return;
+  }
+
   if (submitBtn) {
     submitBtn.disabled = true;
     submitBtn.textContent = t('form.sending');

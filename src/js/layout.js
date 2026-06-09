@@ -44,6 +44,7 @@ function renderHeader() {
   ).join('');
 
   return `
+  <a href="#main" class="skip-link" data-i18n="a11y.skip">Pređi na sadržaj</a>
   <nav class="navbar" aria-label="Beli Drim">
     <div class="navbar__container">
       <a href="index.html" class="navbar__logo" aria-label="${site.companyName}">
@@ -57,7 +58,7 @@ function renderHeader() {
       <div class="navbar__menu" id="primary-menu">
         <ul class="navbar__nav">${links}</ul>
         <div class="navbar__actions">
-          <div class="lang-switch" role="group" data-i18n-aria="lang.toggleLabel" aria-label="Language">
+          <div class="lang-switch" role="group" data-i18n-aria="lang.toggleLabel">
             <button type="button" class="lang-switch__btn" data-lang-option="sr">SR</button>
             <button type="button" class="lang-switch__btn" data-lang-option="en">EN</button>
           </div>
@@ -127,17 +128,48 @@ function initMobileMenu() {
   const menu = document.querySelector('#primary-menu');
   if (!navbar || !toggle || !menu) return;
 
+  let lastFocused = null;
+
   const setOpen = (open) => {
     menu.classList.toggle('is-open', open);
     toggle.classList.toggle('is-active', open);
     navbar.classList.toggle('is-menu-open', open);
     toggle.setAttribute('aria-expanded', String(open));
     document.documentElement.style.overflow = open ? 'hidden' : '';
+
+    if (open) {
+      lastFocused = document.activeElement;
+      menu.querySelector('a, button')?.focus();
+    } else if (lastFocused) {
+      lastFocused.focus();
+      lastFocused = null;
+    }
   };
 
   toggle.addEventListener('click', () =>
     setOpen(!menu.classList.contains('is-open'))
   );
+
+  // Open menu behaves as a modal: Escape closes it, Tab is trapped inside.
+  menu.addEventListener('keydown', (e) => {
+    if (!menu.classList.contains('is-open')) return;
+    if (e.key === 'Escape') {
+      setOpen(false);
+      return;
+    }
+    if (e.key !== 'Tab') return;
+    const items = menu.querySelectorAll('a[href], button:not([disabled])');
+    if (!items.length) return;
+    const first = items[0];
+    const last = items[items.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
+  });
 
   // Close the menu after navigating or resizing to desktop.
   menu.querySelectorAll('.navbar__link').forEach((l) =>
@@ -157,6 +189,45 @@ function initNavScroll() {
   window.addEventListener('scroll', update, { passive: true });
 }
 
+// Inject LocalBusiness/MovingCompany JSON-LD built from site.config (the single
+// source of truth). Placeholder phone / empty socials are omitted so we never
+// publish fake structured data; the moment real values land in the config they
+// appear here too.
+function injectStructuredData() {
+  if (document.getElementById('ld-localbusiness')) return;
+
+  const data = {
+    '@context': 'https://schema.org',
+    '@type': 'MovingCompany',
+    name: site.companyLegal,
+    url: site.siteUrl + '/',
+    logo: site.siteUrl + '/src/img/icon-512.png',
+    image: site.siteUrl + '/src/img/highway.jpg',
+    foundingDate: site.foundingYear,
+    email: site.email,
+    address: {
+      '@type': 'PostalAddress',
+      // Structured parts of site.address (update here if the address changes).
+      streetAddress: 'IV Crnogorska 30g',
+      addressLocality: 'Kraljevo',
+      addressCountry: 'RS',
+    },
+    areaServed: ['RS'],
+  };
+
+  if (site.phoneHref && site.phoneHref !== '+38163000000') {
+    data.telephone = site.phoneDisplay;
+  }
+  const sameAs = [site.social.facebook, site.social.instagram].filter(Boolean);
+  if (sameAs.length) data.sameAs = sameAs;
+
+  const script = document.createElement('script');
+  script.type = 'application/ld+json';
+  script.id = 'ld-localbusiness';
+  script.textContent = JSON.stringify(data);
+  document.head.appendChild(script);
+}
+
 // Injects header + footer and wires the mobile menu. Translation is applied
 // afterwards by initI18n() in main.js (covers injected + static content).
 export function renderLayout() {
@@ -166,4 +237,5 @@ export function renderLayout() {
   if (footer) footer.innerHTML = renderFooter();
   initMobileMenu();
   initNavScroll();
+  injectStructuredData();
 }

@@ -5,11 +5,18 @@
 export const site = {
   companyName: 'BELI DRIM 2014',
   companyLegal: 'Beli Drim 2014 DOO',
+  foundingYear: '2014',
 
+  // Public site URL (no trailing slash). Used for JSON-LD structured data.
+  // Change this if you move to a custom domain (then also update the absolute
+  // URLs in each page's <head> canonical/og tags and in sitemap.xml).
+  siteUrl: 'https://labranka.github.io/belidrim',
+
+  // ⚠️ BEFORE GOING LIVE — replace the three [PLACEHOLDER] values below.
   // Contact — used on the Contact page and in the footer.
-  phoneDisplay: '+381 63 000 0000', // [PLACEHOLDER] e.g. +381 63 123 4567
-  phoneHref: '+38163000000', // [PLACEHOLDER] same number, digits only, with country code
-  email: 'info@belidrim.rs', // [PLACEHOLDER]
+  phoneDisplay: '+381 65 3753999',
+  phoneHref: '+381653753999',
+  email: 'info@belidrim.rs', // [PLACEHOLDER] verify this mailbox is monitored
   address: 'IV Crnogorska 30g, Kraljevo, Srbija', // full street address
 
   // Map: no API key needed. Put the same address (or a Google Maps "place" query) here.

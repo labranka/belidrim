@@ -7,8 +7,13 @@ const DEFAULT_LANG = 'sr';
 const SUPPORTED = ['sr', 'en'];
 
 export function getLang() {
-  const stored = localStorage.getItem(STORAGE_KEY);
-  return SUPPORTED.includes(stored) ? stored : DEFAULT_LANG;
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    return SUPPORTED.includes(stored) ? stored : DEFAULT_LANG;
+  } catch {
+    // localStorage can throw (Safari Private Mode, storage disabled).
+    return DEFAULT_LANG;
+  }
 }
 
 export function t(key, lang = getLang()) {
@@ -45,7 +50,11 @@ export function applyTranslations(lang = getLang(), root = document) {
 
 export function setLang(lang) {
   if (!SUPPORTED.includes(lang)) return;
-  localStorage.setItem(STORAGE_KEY, lang);
+  try {
+    localStorage.setItem(STORAGE_KEY, lang);
+  } catch {
+    // Storage unavailable — still apply the language for this session.
+  }
   applyTranslations(lang);
 }
 

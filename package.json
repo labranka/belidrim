@@ -1,18 +1,11 @@
 {
   "name": "belidrim",
-  "version": "1.0.0",
-  "description": "Business website",
-  "default": "index.html",
+  "version": "2.0.0",
+  "description": "Beli Drim 2014 DOO — transport company website (static, mobile-first, SR/EN).",
   "scripts": {
-    "start": "parcel index.html",
-    "build": "parcel build index.html --dist-dir ./dist"
+    "start": "python3 -m http.server 3000",
+    "serve": "npx --yes serve@latest -l 3000 ."
   },
   "author": "Branka Lakicevic",
-  "license": "ISC",
-  "devDependencies": {
-    "parcel": "^2.8.3"
-  },
-  "dependencies": {
-    "@fortawesome/fontawesome-free": "^6.4.0"
-  }
+  "license": "ISC"
 }

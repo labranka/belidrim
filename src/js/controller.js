@@ -1,32 +1,11 @@
-class MobileMenu {
-  constructor() {
-    this.menu = document.querySelector('#mobile-menu');
-    this.menuLinks = document.querySelector('.navbar__menu');
-    this.htmlEl = document.querySelector('html');
-
-    this.menu.addEventListener('click', () => {
-      this.toggleMenu();
-    });
-  }
-
-  toggleMenu() {
-    this.menu.classList.toggle('is-active');
-    this.menuLinks.classList.toggle('active');
-
-    if (this.menu.classList.contains('is-active')) {
-      this.htmlEl.style.overflow = 'hidden';
-    } else {
-      this.htmlEl.style.overflow = 'auto';
-    }
-  }
-}
-
+// Image slider used on the Gallery page. Exposed as initSlider() and only
+// started when a .slider element is present on the page.
 class Slider {
-  constructor() {
-    this.slides = document.querySelectorAll('.slide');
-    this.btnLeft = document.querySelector('.slider__btn--left');
-    this.btnRight = document.querySelector('.slider__btn--right');
-    this.dotContainer = document.querySelector('.dots');
+  constructor(root) {
+    this.slides = root.querySelectorAll('.slide');
+    this.btnLeft = root.querySelector('.slider__btn--left');
+    this.btnRight = root.querySelector('.slider__btn--right');
+    this.dotContainer = root.querySelector('.dots');
 
     this.curSlide = 0;
     this.maxSlide = this.slides.length;
@@ -40,7 +19,7 @@ class Slider {
     this.slides.forEach((_, i) => {
       this.dotContainer.insertAdjacentHTML(
         'beforeend',
-        `<button class="dots__dot" data-slide="${i}"></button>`
+        `<button class="dots__dot" data-slide="${i}" aria-label="Slide ${i + 1}"></button>`
       );
     });
   }
@@ -52,32 +31,23 @@ class Slider {
   }
 
   activateDot(slide) {
-    document
+    this.dotContainer
       .querySelectorAll('.dots__dot')
-      .forEach(dot => dot.classList.remove('dots__dot--active'));
-
-    document
-      .querySelector(`.dots__dot[data-slide="${slide}"]`)
-      .classList.add('dots__dot--active');
+      .forEach((dot) => dot.classList.remove('dots__dot--active'));
+    const active = this.dotContainer.querySelector(
+      `.dots__dot[data-slide="${slide}"]`
+    );
+    if (active) active.classList.add('dots__dot--active');
   }
 
   nextSlide() {
-    if (this.curSlide === this.maxSlide - 1) {
-      this.curSlide = 0;
-    } else {
-      this.curSlide++;
-    }
-
+    this.curSlide = this.curSlide === this.maxSlide - 1 ? 0 : this.curSlide + 1;
     this.goToSlide(this.curSlide);
     this.activateDot(this.curSlide);
   }
 
   prevSlide() {
-    if (this.curSlide === 0) {
-      this.curSlide = this.maxSlide - 1;
-    } else {
-      this.curSlide--;
-    }
+    this.curSlide = this.curSlide === 0 ? this.maxSlide - 1 : this.curSlide - 1;
     this.goToSlide(this.curSlide);
     this.activateDot(this.curSlide);
   }
@@ -91,23 +61,23 @@ class Slider {
     this.btnRight.addEventListener('click', () => this.nextSlide());
     this.btnLeft.addEventListener('click', () => this.prevSlide());
 
-    document.addEventListener('keydown', e => {
+    document.addEventListener('keydown', (e) => {
       if (e.key === 'ArrowLeft') this.prevSlide();
-      e.key === 'ArrowRight' && this.nextSlide();
+      if (e.key === 'ArrowRight') this.nextSlide();
     });
 
-    this.dotContainer.addEventListener('click', e => {
-      if (e.target.classList.contains('dots__dot')) {
-        const { slide } = e.target.dataset;
-        this.goToSlide(slide);
-        this.activateDot(slide);
-      }
+    this.dotContainer.addEventListener('click', (e) => {
+      const dot = e.target.closest('.dots__dot');
+      if (!dot) return;
+      const { slide } = dot.dataset;
+      this.curSlide = Number(slide);
+      this.goToSlide(slide);
+      this.activateDot(slide);
     });
   }
 }
 
-// Usage
-const mobileMenu = new MobileMenu();
-if(document.querySelector(".slider")){
-const slider = new Slider();
+export function initSlider() {
+  const root = document.querySelector('.slider');
+  if (root) new Slider(root);
 }

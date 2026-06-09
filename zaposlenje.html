@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="sr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zaposlenje — Beli Drim 2014 DOO</title>
+    <meta
+      name="description"
+      content="Tražimo pouzdane vozače. Pridružite se timu Beli Drim 2014 DOO — prijavite se na otvorene pozicije za transport robe."
+    />
+    <meta name="theme-color" content="#0d2440" />
+    <link rel="icon" href="src/img/logoBD.svg" type="image/svg+xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Zaposlenje — Beli Drim 2014 DOO" />
+    <meta property="og:image" content="src/img/truck2.jpg" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="src/css/style.css" />
+    <script type="module" src="src/js/main.js"></script>
+  </head>
+  <body>
+    <header id="site-header"></header>
+
+    <main>
+      <section class="page-hero">
+        <span class="eyebrow" data-i18n="careers.eyebrow"></span>
+        <h1 data-i18n="careers.title"></h1>
+        <p data-i18n="careers.intro"></p>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="careers__grid">
+            <!-- Open positions -->
+            <div>
+              <h2 class="section__title" data-i18n="careers.openTitle"></h2>
+              <div class="positions">
+                <div class="position">
+                  <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M3 4h11a1 1 0 0 1 1 1v9H2V5a1 1 0 0 1 1-1Zm13 4h3.2a1 1 0 0 1 .8.4l2.8 3.7a1 1 0 0 1 .2.6V14h-7V8ZM6.5 15a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm11 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Z"/></svg>
+                  <span data-i18n="careers.role1"></span>
+                </div>
+                <div class="position">
+                  <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M3 4h11a1 1 0 0 1 1 1v9H2V5a1 1 0 0 1 1-1Zm13 4h3.2a1 1 0 0 1 .8.4l2.8 3.7a1 1 0 0 1 .2.6V14h-7V8ZM6.5 15a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm11 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Z"/></svg>
+                  <span data-i18n="careers.role2"></span>
+                </div>
+                <div class="position">
+                  <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M3 4h11a1 1 0 0 1 1 1v9H2V5a1 1 0 0 1 1-1Zm13 4h3.2a1 1 0 0 1 .8.4l2.8 3.7a1 1 0 0 1 .2.6V14h-7V8ZM6.5 15a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm11 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Z"/></svg>
+                  <span data-i18n="careers.role3"></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Application form -->
+            <div class="form-card">
+              <h2 class="section__title" data-i18n="careers.formTitle"></h2>
+              <p class="section__subtitle" data-i18n="careers.formNote" style="margin-bottom:1.5rem"></p>
+              <form class="js-form" novalidate>
+                <input type="hidden" name="subject" value="Nova prijava za posao — Beli Drim sajt" />
+                <input type="checkbox" name="botcheck" class="form__hp" tabindex="-1" autocomplete="off" />
+
+                <div class="form__group">
+                  <label class="form__label" for="c-name" data-i18n="form.name"></label>
+                  <input class="form__control" id="c-name" name="Ime" type="text" required />
+                </div>
+                <div class="form__group">
+                  <label class="form__label" for="c-phone" data-i18n="form.phone"></label>
+                  <input class="form__control" id="c-phone" name="Telefon" type="tel" required />
+                </div>
+                <div class="form__group">
+                  <label class="form__label" for="c-email" data-i18n="form.email"></label>
+                  <input class="form__control" id="c-email" name="Email" type="email" required />
+                </div>
+                <div class="form__group">
+                  <label class="form__label" for="c-position" data-i18n="form.position"></label>
+                  <select class="form__control" id="c-position" name="Pozicija">
+                    <option data-i18n="careers.role1"></option>
+                    <option data-i18n="careers.role2"></option>
+                    <option data-i18n="careers.role3"></option>
+                  </select>
+                </div>
+                <div class="form__group">
+                  <label class="form__label" for="c-message" data-i18n="form.message"></label>
+                  <textarea class="form__control" id="c-message" name="Poruka"></textarea>
+                </div>
+                <button type="submit" class="btn btn--primary btn--block" data-i18n="form.send"></button>
+                <p class="form__status" data-form-status role="status" aria-live="polite"></p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer id="site-footer"></footer>
+  </body>
+</html>

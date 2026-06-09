@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="sr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kontakt — Beli Drim 2014 DOO</title>
+    <meta
+      name="description"
+      content="Kontaktirajte Beli Drim 2014 DOO — telefon, email, adresa i mapa. Zatražite ponudu za transport robe u Srbiji i regionu."
+    />
+    <meta name="theme-color" content="#0d2440" />
+    <link rel="icon" href="src/img/logoBD.svg" type="image/svg+xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Kontakt — Beli Drim 2014 DOO" />
+    <meta property="og:image" content="src/img/highway.jpg" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="src/css/style.css" />
+    <script type="module" src="src/js/main.js"></script>
+  </head>
+  <body>
+    <header id="site-header"></header>
+
+    <main>
+      <section class="page-hero">
+        <span class="eyebrow" data-i18n="contact.eyebrow"></span>
+        <h1 data-i18n="contact.title"></h1>
+        <p data-i18n="contact.intro"></p>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="contact__grid">
+            <!-- Contact details + map (rendered from site.config.js) -->
+            <div>
+              <div class="contact-info" id="contact-info"></div>
+              <div class="map">
+                <iframe
+                  id="contact-map"
+                  title="Mapa — Beli Drim 2014 DOO"
+                  loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"
+                ></iframe>
+              </div>
+            </div>
+
+            <!-- Contact form -->
+            <div class="form-card">
+              <h2 class="section__title" data-i18n="contact.formTitle"></h2>
+              <form class="js-form" novalidate>
+                <input type="hidden" name="subject" value="Nova poruka sa Beli Drim sajta" />
+                <input type="checkbox" name="botcheck" class="form__hp" tabindex="-1" autocomplete="off" />
+
+                <div class="form__group">
+                  <label class="form__label" for="k-name" data-i18n="form.name"></label>
+                  <input class="form__control" id="k-name" name="Ime" type="text" required />
+                </div>
+                <div class="form__group">
+                  <label class="form__label" for="k-email" data-i18n="form.email"></label>
+                  <input class="form__control" id="k-email" name="Email" type="email" required />
+                </div>
+                <div class="form__group">
+                  <label class="form__label" for="k-phone" data-i18n="form.phone"></label>
+                  <input class="form__control" id="k-phone" name="Telefon" type="tel" />
+                </div>
+                <div class="form__group">
+                  <label class="form__label" for="k-message" data-i18n="form.message"></label>
+                  <textarea class="form__control" id="k-message" name="Poruka" required></textarea>
+                </div>
+                <button type="submit" class="btn btn--primary btn--block" data-i18n="form.send"></button>
+                <p class="form__status" data-form-status role="status" aria-live="polite"></p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer id="site-footer"></footer>
+  </body>
+</html>

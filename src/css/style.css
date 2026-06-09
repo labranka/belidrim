@@ -213,20 +213,14 @@ p {
 /* Solid state — when scrolled past the hero, or while the mobile menu is open */
 .navbar.is-scrolled,
 .navbar.is-menu-open {
-  background: var(--white);
-  box-shadow: var(--shadow-sm);
+  background: var(--navy);
+  box-shadow: 0 2px 14px rgba(0, 0, 0, 0.22);
 }
 
+/* The navbar is dark-themed in every state, so the logo is always white. */
 .navbar__logo img {
-  transition: filter 0.25s ease;
-}
-
-/* Transparent state (top of page, menu closed): white logo + hamburger */
-.navbar:not(.is-scrolled):not(.is-menu-open) .navbar__logo img {
   filter: brightness(0) invert(1);
-}
-.navbar:not(.is-scrolled):not(.is-menu-open) .navbar__toggle .bar {
-  background: var(--white);
+  transition: filter 0.25s ease;
 }
 
 .navbar__container {
@@ -260,7 +254,7 @@ p {
 .navbar__toggle .bar {
   height: 3px;
   width: 100%;
-  background: var(--navy);
+  background: var(--white);
   border-radius: 2px;
   transition: transform 0.25s ease, opacity 0.25s ease;
 }
@@ -282,7 +276,7 @@ p {
   left: 0;
   right: 0;
   height: calc(100dvh - var(--header-h));
-  background: var(--white);
+  background: var(--navy);
   padding: 1.5rem 1.25rem 2.5rem;
   display: flex;
   flex-direction: column;
@@ -307,12 +301,12 @@ p {
   padding: 0.9rem 0.25rem;
   font-size: 1.15rem;
   font-weight: 600;
-  color: var(--ink);
-  border-bottom: 1px solid var(--line);
+  color: rgba(255, 255, 255, 0.9);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .navbar__link.is-active {
-  color: var(--blue);
+  color: var(--accent);
 }
 
 .navbar__actions {
@@ -330,10 +324,10 @@ p {
 .lang-switch {
   display: inline-flex;
   align-self: flex-start;
-  border: 1px solid var(--line);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 999px;
   padding: 3px;
-  background: var(--bg-soft);
+  background: rgba(255, 255, 255, 0.12);
 }
 
 .lang-switch__btn {
@@ -342,7 +336,7 @@ p {
   font-family: inherit;
   font-weight: 700;
   font-size: 0.85rem;
-  color: var(--muted);
+  color: rgba(255, 255, 255, 0.85);
   padding: 0.4rem 0.9rem;
   border-radius: 999px;
   cursor: pointer;
@@ -350,8 +344,8 @@ p {
 }
 
 .lang-switch__btn.is-active {
-  background: var(--blue);
-  color: var(--white);
+  background: var(--white);
+  color: var(--navy);
 }
 
 /* ============================================================================
@@ -1045,30 +1039,10 @@ textarea.form__control {
     border-radius: var(--radius-sm);
   }
   .navbar__link:hover {
-    color: var(--blue);
-  }
-  .navbar__link.is-active {
-    color: var(--blue);
-  }
-
-  /* Transparent navbar over the dark hero — light text on desktop */
-  .navbar:not(.is-scrolled) .navbar__link {
-    color: rgba(255, 255, 255, 0.92);
-  }
-  .navbar:not(.is-scrolled) .navbar__link:hover,
-  .navbar:not(.is-scrolled) .navbar__link.is-active {
     color: var(--white);
   }
-  .navbar:not(.is-scrolled) .lang-switch {
-    background: rgba(255, 255, 255, 0.15);
-    border-color: rgba(255, 255, 255, 0.3);
-  }
-  .navbar:not(.is-scrolled) .lang-switch__btn {
-    color: rgba(255, 255, 255, 0.85);
-  }
-  .navbar:not(.is-scrolled) .lang-switch__btn.is-active {
-    background: var(--white);
-    color: var(--navy);
+  .navbar__link.is-active {
+    color: var(--accent);
   }
 
   .navbar__actions {

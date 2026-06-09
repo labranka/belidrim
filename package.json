@@ -1,0 +1,18 @@
+{
+  "name": "belidrim",
+  "version": "1.0.0",
+  "description": "Business website",
+  "default": "index.html",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html --dist-dir ./dist"
+  },
+  "author": "Branka Lakicevic",
+  "license": "ISC",
+  "devDependencies": {
+    "parcel": "^2.8.3"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.4.0"
+  }
+}

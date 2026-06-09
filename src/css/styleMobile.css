@@ -1,0 +1,262 @@
+@media screen and (max-width: 768px) {
+  .main__content h1 {
+    font-size: 2rem;
+    margin-top: 3rem;
+  }
+
+  .main__content h2 {
+    font-size: 2rem;
+  }
+
+  .main_content p {
+    margin-top: 2rem;
+    font-size: 1.5rem;
+  }
+
+  .main__btn {
+    padding: 12px 36px;
+    margin: 2.5rem 0;
+  }
+
+  .services {
+    height: 100%;
+  }
+
+  .services h1 {
+    font-size: 1.2rem;
+  }
+
+  .services__card {
+    width: 300px;
+    height: 400px;
+    position: relative;
+  }
+.servicesCard--info{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    bottom: 0;
+    left: 0;
+    padding: 16px 24px;
+}
+  /* FOOTER */
+  .footer__container {
+    background-color: #0c1f2346;
+    padding: 5rem 0;
+    display: flex;
+    flex-direction: column;
+    content: centre;
+    align-items: center;
+  }
+
+  #footer__logo {
+    color: var(--color-secondary-darker);
+    display: flex;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  #footer__logo svg path:nth-child(6) {
+    fill: #0c1f2300;
+  }
+
+  #footer__logo svg:hover path:not(:last-child) {
+    fill: var(--color-primary);
+    transition: all 0.3s ease;
+  }
+
+  #footer__logo svg {
+    width: 100px;
+    height: 50px;
+  }
+
+  .footer__links {
+    width: 100%;
+    max-width: 1000px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .footer__link--wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .footer__link--items {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 16px;
+    text-align: left;
+
+    box-sizing: border-box;
+  }
+
+  .footer__link--items h2 {
+    margin-bottom: 16px;
+  }
+
+  .footer__link--items > h2 {
+    color: #5583b2;
+  }
+
+  .footer__link--items a {
+    color: #5583b2;
+    text-decoration: none;
+    margin-bottom: 0.5rem;
+  }
+
+  .footer__link--items a:hover {
+    color: #3c6185;
+    transform: 0.3s ease-out;
+  }
+
+  .social__icon--link {
+    display: flex;
+  }
+
+  .socialIcon--mail svg path {
+    fill: #5583b2;
+    transform: 0.3s ease-out;
+  }
+
+  .socialIcon--tel svg path {
+    fill: #5583b2;
+    transform: 0.3s ease-out;
+  }
+
+  .socialIcon--mail svg:hover path,
+  .socialIcon--tel svg:hover path {
+    fill: #1a3957;
+    transform: 0.3s ease-out;
+  }
+
+  .social__icons {
+    display: flex;
+    gap: 24px;
+  }
+  .social__icon--link svg {
+    width: 32px;
+    height: 32px;
+  }
+
+  .website__right {
+    color: #1a3957;
+    margin-top: 64px;
+  }
+
+  .social__media--wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    padding: 24px 16px 2px 16px;
+  }
+
+  .navbar__container {
+    display: flex;
+    justify-content: space-between;
+    height: 80px;
+    z-index: 10;
+    width: 100%;
+    max-width: 1440px;
+    padding: 0;
+    background-color: #424242;
+    box-shadow: 0 4px 2px -2px #464646;
+  }
+
+  .navbar__menu {
+    display: grid;
+    grid-template-columns: auto;
+    margin: 0;
+    width: 100%;
+    position: absolute;
+    top: -1000px;
+    opacity: 0;
+    transition: all 0.5 ease;
+    height: 50vh;
+    z-index: -1;
+    background: var(--color-secondary);
+    transition: all 0.35s;
+  }
+
+  .navbar__menu.active {
+    background: var(--color-secondary);
+    opacity: 1;
+    top: 100%;
+    z-index: -1;
+    height: calc(100vh - 80px);
+    font-size: 1.6rem;
+  }
+
+  #navbar__logo {
+    padding-left: 24px;
+  }
+
+  .navbar__toggle .bar {
+    width: 25px;
+    height: 3px;
+    margin: 3px auto;
+    transition: all 0.3s ease-in-out;
+    background-color: var(--color-secondary-darker);
+  }
+
+  .navbar__item {
+    width: 100%;
+  }
+
+  .navbar__links {
+    text-align: center;
+    padding: 2rem;
+    width: 100%;
+    display: table;
+  }
+
+  #mobile-menu {
+    position: absolute;
+    top: 24px;
+    right: 5%;
+    transform: translate(5%, 20%);
+  }
+
+  .navbar__btn {
+    padding-bottom: 2rem;
+  }
+
+  .button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    height: 80px;
+    margin: 0;
+  }
+
+  .navbar__toggle .bar {
+    display: block;
+    cursor: pointer;
+  }
+
+  #mobile-menu.is-active .bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  #mobile-menu.is-active .bar:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+  }
+  #mobile-menu.is-active .bar:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+  }
+
+  .main__container {
+    grid-template-columns: 1fr;
+    padding: 24px;
+    gap: 64px;
+  }
+  .main__contentAboutUs {
+    text-align: center;
+  }
+}

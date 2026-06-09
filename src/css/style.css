@@ -635,7 +635,7 @@ p {
 
 .about__img img {
   width: 100%;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 4 / 5;
   object-fit: cover;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow);
@@ -1202,6 +1202,10 @@ textarea.form__control {
   .about__layout {
     grid-template-columns: 1.4fr 1fr;
     gap: 3.5rem;
+  }
+
+  .about__img img {
+    aspect-ratio: 16 / 9;
   }
 
   .values__grid {

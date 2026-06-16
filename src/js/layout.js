@@ -2,12 +2,15 @@
 // placeholders present on every page, so they live in one place only.
 import { site } from './site.config.js';
 
+// Clean, extension-less URLs (GitHub Pages serves about-us.html at /about-us).
+// `href` is what we link to; `match` is the page slug used to flag the active
+// link (compared against the normalised current path). Home links to `/`.
 const NAV_ITEMS = [
-  { href: 'index.html', key: 'nav.home', id: 'home' },
-  { href: 'about-us.html', key: 'nav.about', id: 'about' },
-  { href: 'gallery.html', key: 'nav.gallery', id: 'gallery' },
-  { href: 'zaposlenje.html', key: 'nav.careers', id: 'careers' },
-  { href: 'kontakt.html', key: 'nav.contact', id: 'contact' },
+  { href: '/', match: 'index', key: 'nav.home', id: 'home' },
+  { href: 'about-us', match: 'about-us', key: 'nav.about', id: 'about' },
+  { href: 'gallery', match: 'gallery', key: 'nav.gallery', id: 'gallery' },
+  { href: 'zaposlenje', match: 'zaposlenje', key: 'nav.careers', id: 'careers' },
+  { href: 'kontakt', match: 'kontakt', key: 'nav.contact', id: 'contact' },
 ];
 
 const LOGO_SRC = 'src/img/logoBD.svg';
@@ -26,8 +29,10 @@ const ICONS = {
 };
 
 function currentFile() {
-  const file = location.pathname.split('/').pop();
-  return file && file.length ? file : 'index.html';
+  // Normalise the path to a slug: strip any .html so /about-us and
+  // /about-us.html both match, and treat the root '/' as 'index'.
+  const file = location.pathname.split('/').pop().replace(/\.html$/, '');
+  return file && file.length ? file : 'index';
 }
 
 function renderHeader() {
@@ -36,9 +41,9 @@ function renderHeader() {
     (item) =>
       `<li class="navbar__item">
         <a href="${item.href}" class="navbar__link${
-        item.href === active ? ' is-active' : ''
+        item.match === active ? ' is-active' : ''
       }" data-i18n="${item.key}"${
-        item.href === active ? ' aria-current="page"' : ''
+        item.match === active ? ' aria-current="page"' : ''
       }></a>
       </li>`
   ).join('');
@@ -47,7 +52,7 @@ function renderHeader() {
   <a href="#main" class="skip-link" data-i18n="a11y.skip">Pređi na sadržaj</a>
   <nav class="navbar" aria-label="Beli Drim">
     <div class="navbar__container">
-      <a href="index.html" class="navbar__logo" aria-label="${site.companyName}">
+      <a href="/" class="navbar__logo" aria-label="${site.companyName}">
         <img src="${LOGO_SRC}" alt="${site.companyName} logo" width="120" height="40" />
       </a>
 
@@ -62,7 +67,7 @@ function renderHeader() {
             <button type="button" class="lang-switch__btn" data-lang-option="sr">SR</button>
             <button type="button" class="lang-switch__btn" data-lang-option="en">EN</button>
           </div>
-          <a href="kontakt.html" class="btn btn--accent navbar__cta" data-i18n="nav.cta"></a>
+          <a href="kontakt" class="btn btn--accent navbar__cta" data-i18n="nav.cta"></a>
         </div>
       </div>
     </div>
@@ -108,6 +113,7 @@ function renderFooter() {
       <div class="footer__col footer__brand">
         <img src="${LOGO_SRC}" alt="${site.companyName} logo" class="footer__logo" width="140" height="46" />
         <p class="footer__tagline" data-i18n="footer.tagline"></p>
+        <p class="footer__legal">PIB: ${site.pib} &middot; MB: ${site.mb}</p>
       </div>
 
       <div class="footer__col">
@@ -218,6 +224,7 @@ function injectStructuredData() {
     logo: site.siteUrl + '/src/img/icon-512.png',
     image: site.siteUrl + '/src/img/highway.jpg',
     foundingDate: site.foundingYear,
+    taxID: site.pib,
     email: site.email,
     address: {
       '@type': 'PostalAddress',

@@ -7,6 +7,10 @@ export const site = {
   companyLegal: 'Beli Drim 2014 DOO',
   foundingYear: '2014',
 
+  // Legal identifiers — shown in the footer (companies often need these for invoices).
+  pib: '108470583', // Tax ID / PIB
+  mb: '21006084', // Company registration number / matični broj
+
   // Public site URL (no trailing slash). Used for JSON-LD structured data.
   // Change this if you move to a custom domain (then also update the absolute
   // URLs in each page's <head> canonical/og tags and in sitemap.xml).

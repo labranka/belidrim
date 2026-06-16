@@ -111,7 +111,9 @@ function renderFooter() {
   <footer class="footer">
     <div class="footer__container">
       <div class="footer__col footer__brand">
-        <img src="${LOGO_SRC}" alt="${site.companyName} logo" class="footer__logo" width="140" height="46" />
+        <a href="/" class="footer__logo-link" aria-label="${site.companyName}">
+          <img src="${LOGO_SRC}" alt="" class="footer__logo" width="140" height="46" />
+        </a>
         <p class="footer__tagline" data-i18n="footer.tagline"></p>
       </div>
 

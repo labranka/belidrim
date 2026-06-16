@@ -1029,8 +1029,17 @@ textarea.form__control {
 .footer__logo {
   height: 44px;
   width: auto;
-  margin-bottom: 1rem;
   filter: brightness(0) invert(1);
+  transition: filter 0.25s ease;
+}
+.footer__logo-link {
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+.footer__logo-link:hover .footer__logo,
+.footer__logo-link:focus-visible .footer__logo {
+  filter: brightness(0) saturate(100%) invert(73%) sepia(53%) saturate(1015%)
+    hue-rotate(351deg) brightness(99%) contrast(94%);
 }
 
 .footer__tagline {

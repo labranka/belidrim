@@ -1,6 +1,6 @@
 {
   "name": "belidrim",
-  "version": "2.1.12",
+  "version": "2.1.13",
   "type": "module",
   "description": "Beli Drim 2014 DOO — transport company website (static, mobile-first, SR/EN).",
   "scripts": {

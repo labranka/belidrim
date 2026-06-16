@@ -10,7 +10,7 @@ export const site = {
   // Public site URL (no trailing slash). Used for JSON-LD structured data.
   // Change this if you move to a custom domain (then also update the absolute
   // URLs in each page's <head> canonical/og tags and in sitemap.xml).
-  siteUrl: 'https://labranka.github.io/belidrim',
+  siteUrl: 'https://belidrim.rs',
 
   // ⚠️ BEFORE GOING LIVE — replace the three [PLACEHOLDER] values below.
   // Contact — used on the Contact page and in the footer.
@@ -38,7 +38,7 @@ export const site = {
 
   // Web3Forms access key (free): create one at https://web3forms.com using your email.
   // Until you paste a real key, form submissions will show an error.
-  web3formsKey: 'YOUR_WEB3FORMS_ACCESS_KEY', // [PLACEHOLDER]
+  web3formsKey: '981f6fcf-f9c9-49d5-a93f-79f5c9d92e02',
 };
 
 // Built from mapQuery — embeds Google Maps with no API key required.

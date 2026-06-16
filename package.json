@@ -1,13 +1,15 @@
 {
   "name": "belidrim",
-  "version": "2.1.18",
+  "version": "2.1.19",
   "type": "module",
   "description": "Beli Drim 2014 DOO — transport company website (static, mobile-first, SR/EN).",
   "scripts": {
     "start": "python3 -m http.server 3000",
     "serve": "npx --yes serve@latest -l 3000 .",
     "optimize:images": "node scripts/optimize-images.mjs",
-    "prerender": "node scripts/prerender.mjs"
+    "prerender": "node scripts/prerender.mjs",
+    "seo": "node scripts/seo-build.mjs",
+    "og": "node scripts/og-image.mjs"
   },
   "author": "Branka Lakicevic",
   "license": "ISC"

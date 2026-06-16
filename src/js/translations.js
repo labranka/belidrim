@@ -86,12 +86,16 @@ export const translations = {
     'gallery.title': 'Naš vozni park',
     'gallery.intro':
       'Dobrodošli u galeriju našeg voznog parka! Predstavljamo vam našu flotu savremenih vozila prilagođenih da udovolje svim potrebama naših klijenata.',
+    'gallery.seoText':
+      'Naš vozni park čine savremeni kamioni i šleperi za domaći i međunarodni transport robe. Iz Kraljeva pokrivamo celu Srbiju i region, uz redovno održavana vozila i bezbedan, tačan prevoz.',
 
     // --- Careers page ---
     'careers.eyebrow': 'Zaposlenje',
     'careers.title': 'Pridružite se našem timu',
     'careers.intro':
       'Tražimo pouzdane i odgovorne vozače koji žele da budu deo stabilne porodične firme. Ako imate iskustvo u transportu, javite nam se.',
+    'careers.seoText':
+      'Zapošljavamo vozače C i CE kategorije za domaći i međunarodni transport robe. Nudimo stabilan posao u porodičnoj firmi iz Kraljeva, redovna primanja i savremen vozni park.',
     'careers.openTitle': 'Otvorene pozicije',
     'careers.role1': 'Vozač kamiona (kategorije C/CE)',
     'careers.role2': 'Vozač u domaćem transportu',
@@ -218,12 +222,16 @@ export const translations = {
     'gallery.title': 'Our fleet',
     'gallery.intro':
       'Welcome to the gallery of our fleet! We present our fleet of modern vehicles adapted to meet all the needs of our clients.',
+    'gallery.seoText':
+      'Our fleet consists of modern trucks and trailers for domestic and international freight transport. From Kraljevo we cover all of Serbia and the region, with regularly maintained vehicles and safe, on-time delivery.',
 
     // --- Careers page ---
     'careers.eyebrow': 'Careers',
     'careers.title': 'Join our team',
     'careers.intro':
       'We are looking for reliable and responsible drivers who want to be part of a stable family business. If you have experience in transport, get in touch.',
+    'careers.seoText':
+      'We hire C and CE category drivers for domestic and international freight transport. We offer stable work in a family company from Kraljevo, regular pay and a modern fleet.',
     'careers.openTitle': 'Open positions',
     'careers.role1': 'Truck driver (category C/CE)',
     'careers.role2': 'Domestic transport driver',

@@ -17,7 +17,10 @@ export function initContact() {
   const infoEl = document.querySelector('#contact-info');
   if (!infoEl) return; // not the contact page
 
-  infoEl.innerHTML = `
+  // The contact info is pre-rendered as static HTML (for SEO). Only build it
+  // from config here if the page shipped an empty placeholder (fallback).
+  if (infoEl.children.length === 0)
+    infoEl.innerHTML = `
     <div class="contact-info__item">
       <span class="contact-info__icon">${ICON.phone}</span>
       <div>

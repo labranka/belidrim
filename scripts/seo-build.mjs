@@ -8,37 +8,39 @@ import { dirname, join } from 'node:path';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const ORIGIN = 'https://belidrim.rs';
+const OG_IMG = `${ORIGIN}/src/img/og-default.jpg`;
+const OG_ALT = 'Beli Drim, transport robe iz Kraljeva';
 
 // ---- Per-page title / description / OG title (locality + keywords) ----------
 const PAGES = {
   'index.html': {
     title: 'Transport robe Kraljevo | Prevoz robe Srbija i region | Beli Drim',
-    desc: 'Beli Drim — transport i prevoz robe iz Kraljeva za celu Srbiju i region. Sopstveni vozni park, dugogodišnje iskustvo, domaći i međunarodni transport. Zatražite ponudu.',
-    ogTitle: 'Beli Drim | Transport robe — Kraljevo, Srbija i region',
+    desc: 'Beli Drim, pouzdan prevoz i transport robe iz Kraljeva za celu Srbiju i region. Sopstveni vozni park, dugogodišnje iskustvo, domaći i međunarodni transport. Zatražite ponudu.',
+    ogTitle: 'Beli Drim | Transport robe Kraljevo, Srbija i region',
     crumb: null,
   },
   'about-us.html': {
     title: 'O nama | Porodična transportna firma iz Kraljeva | Beli Drim',
     desc: 'Beli Drim je porodična transportna firma iz Kraljeva, osnovana 2014. Sopstveni vozni park i iskusni vozači za domaći i međunarodni transport robe.',
-    ogTitle: 'O nama | Beli Drim — transport iz Kraljeva',
+    ogTitle: 'O nama | Beli Drim, transport iz Kraljeva',
     crumb: { name: 'O nama', path: '/about-us' },
   },
   'gallery.html': {
     title: 'Galerija voznog parka | Kamioni za transport robe | Beli Drim',
-    desc: 'Galerija voznog parka Beli Drim iz Kraljeva — kamioni i šleperi za domaći i međunarodni transport robe u Srbiji i regionu.',
-    ogTitle: 'Galerija voznog parka | Beli Drim — Kraljevo',
+    desc: 'Galerija voznog parka Beli Drim iz Kraljeva, kamioni i šleperi za domaći i međunarodni transport robe u Srbiji i regionu.',
+    ogTitle: 'Galerija voznog parka Kraljevo | Beli Drim',
     crumb: { name: 'Galerija', path: '/gallery' },
   },
   'zaposlenje.html': {
     title: 'Posao za vozače C/CE | Zaposlenje u transportu | Beli Drim',
     desc: 'Tražimo pouzdane vozače C/CE kategorije u Kraljevu. Pridružite se timu Beli Drim i prijavite se na otvorene pozicije u transportu robe.',
-    ogTitle: 'Zaposlenje za vozače | Beli Drim — Kraljevo',
+    ogTitle: 'Zaposlenje za vozače Kraljevo | Beli Drim',
     crumb: { name: 'Zaposlenje', path: '/zaposlenje' },
   },
   'kontakt.html': {
     title: 'Kontakt | Transport robe Kraljevo | Beli Drim',
-    desc: 'Kontaktirajte Beli Drim — IV Crnogorska 30g, 36000 Kraljevo. Telefon, email i mapa. Zatražite ponudu za transport robe u Srbiji i regionu.',
-    ogTitle: 'Kontakt | Beli Drim — Kraljevo',
+    desc: 'Kontaktirajte Beli Drim, IV Crnogorska 30g, 36000 Kraljevo. Telefon, email i mapa. Zatražite ponudu za transport robe u Srbiji i regionu.',
+    ogTitle: 'Kontakt | Beli Drim Kraljevo',
     crumb: { name: 'Kontakt', path: '/kontakt' },
   },
 };
@@ -149,6 +151,25 @@ for (const [page, cfg] of Object.entries(PAGES)) {
   html = setMeta(html, 'name', 'twitter:description', cfg.desc);
   html = setMeta(html, 'property', 'og:title', cfg.ogTitle);
   html = setMeta(html, 'name', 'twitter:title', cfg.ogTitle);
+
+  // Branded 1200x630 share card on every page
+  html = setMeta(html, 'property', 'og:image', OG_IMG);
+  html = setMeta(html, 'name', 'twitter:image', OG_IMG);
+  html = setMeta(html, 'property', 'og:image:width', '1200');
+  html = setMeta(html, 'property', 'og:image:height', '630');
+  html = setMeta(html, 'property', 'og:image:alt', OG_ALT);
+  html = insertAfter(
+    html,
+    /<meta property="og:image:height"[^>]*>/i,
+    '    <meta property="og:image:type" content="image/jpeg" />',
+    'og:image:type'
+  );
+  html = insertAfter(
+    html,
+    /<meta name="twitter:image"[^>]*>/i,
+    `    <meta name="twitter:image:alt" content="${OG_ALT}" />`,
+    'twitter:image:alt'
+  );
 
   // Completeness meta (insert once, next to existing tags)
   html = insertAfter(

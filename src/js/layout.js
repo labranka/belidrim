@@ -127,6 +127,10 @@ function renderFooter() {
           <li>${ICONS.mail}<a href="mailto:${site.email}">${site.email}</a></li>
           <li>${ICONS.pin}<span>${site.address}</span></li>
         </ul>
+      </div>
+
+      <div class="footer__col">
+        <h3 class="footer__heading" data-i18n="footer.legalTitle"></h3>
         <p class="footer__legal">
           ${site.companyLegal}<br />
           PIB: ${site.pib}<br />

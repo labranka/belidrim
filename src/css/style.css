@@ -1086,12 +1086,9 @@ textarea.form__control {
   margin: 0;
 }
 .footer__legal {
-  margin-top: 0.85rem;
-  font-size: 0.7rem;
-  line-height: 1.7;
-  text-align: center;
-  color: rgba(255, 255, 255, 0.55);
-  letter-spacing: 0.01em;
+  font-size: 0.9rem;
+  line-height: 1.9;
+  color: rgba(255, 255, 255, 0.7);
 }
 .footer__credit {
   font-size: 0.82rem;

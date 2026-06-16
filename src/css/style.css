@@ -12,7 +12,7 @@
   --navy-700: #0a1c33;
   --ink: #1f2a37;
   --body: #4b5563;
-  --muted: #6b7280;
+  --muted: #5d636e;
   --bg: #ffffff;
   --bg-soft: #f5f8fc;
   --accent: #f4a51c;
@@ -243,6 +243,27 @@ p {
   z-index: 1000;
   background: transparent;
   transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Before scrolling, the transparent navbar overlays the hero photo. A subtle
+   top scrim guarantees the links stay legible over any part of the image; it
+   fades out once the bar turns solid. */
+.navbar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    rgba(13, 36, 64, 0.55),
+    rgba(13, 36, 64, 0)
+  );
+  transition: opacity 0.3s ease;
+}
+.navbar.is-scrolled::before,
+.navbar.is-menu-open::before {
+  opacity: 0;
 }
 
 /* Solid state — when scrolled past the hero, or while the mobile menu is open */
@@ -937,7 +958,7 @@ p {
   font-size: 1rem;
   color: var(--ink);
   background: var(--bg-soft);
-  border: 1px solid var(--line);
+  border: 1px solid #bcc7d8;
   border-radius: var(--radius-sm);
   padding: 0.8rem 0.9rem;
   transition: border-color 0.2s, box-shadow 0.2s;
@@ -1072,7 +1093,7 @@ textarea.form__control {
 }
 .footer__credit {
   font-size: 0.82rem;
-  color: rgba(255, 255, 255, 0.45);
+  color: rgba(255, 255, 255, 0.6);
 }
 .footer__credit-link {
   color: rgba(255, 255, 255, 0.8);

@@ -53,7 +53,7 @@ function renderHeader() {
   <nav class="navbar" aria-label="Beli Drim">
     <div class="navbar__container">
       <a href="/" class="navbar__logo" aria-label="${site.companyName}">
-        <img src="${LOGO_SRC}" alt="${site.companyName} logo" width="120" height="40" />
+        <img src="${LOGO_SRC}" alt="" width="120" height="40" />
       </a>
 
       <button class="navbar__toggle" id="mobile-menu" aria-label="Meni" aria-expanded="false" aria-controls="primary-menu">
@@ -113,7 +113,11 @@ function renderFooter() {
       <div class="footer__col footer__brand">
         <img src="${LOGO_SRC}" alt="${site.companyName} logo" class="footer__logo" width="140" height="46" />
         <p class="footer__tagline" data-i18n="footer.tagline"></p>
-        <p class="footer__legal">PIB: ${site.pib} &middot; MB: ${site.mb}</p>
+        <p class="footer__legal">
+          ${site.companyLegal}<br />
+          PIB: ${site.pib}<br />
+          MB: ${site.mb}
+        </p>
       </div>
 
       <div class="footer__col">
@@ -231,9 +235,17 @@ function injectStructuredData() {
       // Structured parts of site.address (update here if the address changes).
       streetAddress: 'IV Crnogorska 30g',
       addressLocality: 'Kraljevo',
+      addressRegion: 'Raški okrug',
+      postalCode: '36000',
       addressCountry: 'RS',
     },
     areaServed: ['RS'],
+    openingHoursSpecification: {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+      opens: '08:00',
+      closes: '16:00',
+    },
   };
 
   if (site.phoneHref && site.phoneHref !== '+38163000000') {

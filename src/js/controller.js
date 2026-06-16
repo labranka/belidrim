@@ -13,6 +13,7 @@ class Slider {
     this.maxSlide = this.slides.length;
 
     this.createDots();
+    this.createLiveRegion();
     this.init();
     this.addEventListeners();
     this.addSwipe();
@@ -28,10 +29,22 @@ class Slider {
     });
   }
 
+  // A visually-hidden live region announces the current slide to screen readers.
+  createLiveRegion() {
+    this.live = document.createElement('div');
+    this.live.className = 'sr-only';
+    this.live.setAttribute('role', 'status');
+    this.live.setAttribute('aria-live', 'polite');
+    this.root.appendChild(this.live);
+  }
+
   goToSlide(slide) {
-    this.slides.forEach(
-      (s, i) => (s.style.transform = `translateX(${100 * (i - slide)}%)`)
-    );
+    this.slides.forEach((s, i) => {
+      s.style.transform = `translateX(${100 * (i - slide)}%)`;
+      // Hide off-screen slides from assistive tech so only the current one reads.
+      s.setAttribute('aria-hidden', i === slide ? 'false' : 'true');
+    });
+    if (this.live) this.live.textContent = `Slika ${slide + 1} / ${this.maxSlide}`;
   }
 
   activateDot(slide) {

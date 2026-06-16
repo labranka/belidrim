@@ -6,6 +6,18 @@ import { initForms } from './forms.js';
 import { initContact } from './contact.js';
 import { initReveal } from './reveal.js';
 
+// Keep the address bar on the clean, extension-less URL even when someone opens
+// a .html path directly (typed, old bookmark, external link). No reload — it
+// just rewrites the visible URL. 404.html is served on arbitrary paths, so skip it.
+(function cleanUrl() {
+  const { pathname, search, hash } = location;
+  let clean = pathname;
+  if (pathname.endsWith('/index.html')) clean = pathname.slice(0, -'index.html'.length);
+  else if (pathname.endsWith('.html') && !pathname.endsWith('/404.html'))
+    clean = pathname.slice(0, -'.html'.length);
+  if (clean !== pathname) history.replaceState(null, '', clean + search + hash);
+})();
+
 function start() {
   renderLayout(); // inject shared navbar + footer
   initContact(); // contact page info + map (no-op when absent)

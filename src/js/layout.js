@@ -113,11 +113,6 @@ function renderFooter() {
       <div class="footer__col footer__brand">
         <img src="${LOGO_SRC}" alt="${site.companyName} logo" class="footer__logo" width="140" height="46" />
         <p class="footer__tagline" data-i18n="footer.tagline"></p>
-        <p class="footer__legal">
-          ${site.companyLegal}<br />
-          PIB: ${site.pib}<br />
-          MB: ${site.mb}
-        </p>
       </div>
 
       <div class="footer__col">
@@ -132,6 +127,11 @@ function renderFooter() {
           <li>${ICONS.mail}<a href="mailto:${site.email}">${site.email}</a></li>
           <li>${ICONS.pin}<span>${site.address}</span></li>
         </ul>
+        <p class="footer__legal">
+          ${site.companyLegal}<br />
+          PIB: ${site.pib}<br />
+          MB: ${site.mb}
+        </p>
       </div>
 
       ${socialBlock}
@@ -223,7 +223,8 @@ function injectStructuredData() {
   const data = {
     '@context': 'https://schema.org',
     '@type': 'MovingCompany',
-    name: site.companyLegal,
+    name: site.companyName,
+    legalName: site.companyLegal,
     url: site.siteUrl + '/',
     logo: site.siteUrl + '/src/img/icon-512.png',
     image: site.siteUrl + '/src/img/highway.jpg',

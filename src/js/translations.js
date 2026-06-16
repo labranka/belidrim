@@ -35,7 +35,7 @@ export const translations = {
     'home.aboutEyebrow': 'Ko smo mi?',
     'home.aboutTitle': 'Porodična firma kojoj klijenti veruju',
     'home.aboutText':
-      'Beli Drim 2014 DOO je porodična transportna firma osnovana 2014. godine. Sa sopstvenim voznim parkom i timom iskusnih vozača prevozimo robu brzo, tačno i bezbedno do željene lokacije.',
+      'Beli Drim je porodična transportna firma osnovana 2014. godine. Sa sopstvenim voznim parkom i timom iskusnih vozača prevozimo robu brzo, tačno i bezbedno do željene lokacije.',
     'home.aboutLink': 'Pročitajte našu priču',
 
     // --- Home: services ---
@@ -62,7 +62,7 @@ export const translations = {
     'about.eyebrow': 'O nama',
     'about.title': 'Ko smo mi?',
     'about.p1':
-      'Beli Drim 2014 DOO je firma nastala 2014. godine za transport robe širom regiona vozilima iz našeg voznog parka. Osnovani smo sa ciljem da pružimo kvalitetne usluge transporta robe na teritoriji Srbije i regiona.',
+      'Beli Drim je firma nastala 2014. godine za transport robe širom regiona vozilima iz našeg voznog parka. Osnovani smo sa ciljem da pružimo kvalitetne usluge transporta robe na teritoriji Srbije i regiona.',
     'about.p2':
       'Naša firma poseduje sopstveni vozni park, koji se sastoji od savremenih kamiona, što nam omogućava da pružimo brze i efikasne usluge transporta. Uz to, naš tim stručnjaka i vozača ima dugogodišnje iskustvo u ovom poslu, što nam omogućava da se efikasno nosimo sa svim izazovima na putu.',
     'about.p3':
@@ -167,7 +167,7 @@ export const translations = {
     'home.aboutEyebrow': 'Who we are',
     'home.aboutTitle': 'A family business clients trust',
     'home.aboutText':
-      'Beli Drim 2014 DOO is a family transport company founded in 2014. With our own fleet and a team of experienced drivers, we move your goods quickly, accurately and safely to their destination.',
+      'Beli Drim is a family transport company founded in 2014. With our own fleet and a team of experienced drivers, we move your goods quickly, accurately and safely to their destination.',
     'home.aboutLink': 'Read our story',
 
     // --- Home: services ---
@@ -193,7 +193,7 @@ export const translations = {
     'about.eyebrow': 'About us',
     'about.title': 'Who we are',
     'about.p1':
-      'Beli Drim 2014 DOO is a company founded in 2014 for the transport of goods across the region using vehicles from our own fleet. We were established with the goal of providing quality freight transport services in Serbia and the region.',
+      'Beli Drim is a company founded in 2014 for the transport of goods across the region using vehicles from our own fleet. We were established with the goal of providing quality freight transport services in Serbia and the region.',
     'about.p2':
       'Our company owns its own fleet of modern trucks, which allows us to provide fast and efficient transport services. In addition, our team of experts and drivers has many years of experience in this business, which lets us efficiently handle every challenge on the road.',
     'about.p3':

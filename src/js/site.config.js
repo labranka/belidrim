@@ -3,7 +3,7 @@
 //  Replace every [PLACEHOLDER] value with the real information.
 // ─────────────────────────────────────────────────────────────────────────
 export const site = {
-  companyName: 'BELI DRIM 2014',
+  companyName: 'Beli Drim',
   companyLegal: 'Beli Drim 2014 DOO',
   foundingYear: '2014',
 

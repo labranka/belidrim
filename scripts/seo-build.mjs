@@ -199,4 +199,16 @@ for (const [page, cfg] of Object.entries(PAGES)) {
 
   writeFileSync(path, html);
 }
+// Cloudflare Web Analytics beacon on every page (incl. 404), inserted once
+// before </body>. Privacy-first, cookieless visitor/pageview analytics.
+const BEACON = `<!-- Cloudflare Web Analytics --><script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "4bbacdec2ebf44bf8f19fb2c37575831"}'></script><!-- End Cloudflare Web Analytics -->`;
+for (const page of [...Object.keys(PAGES), '404.html']) {
+  const path = join(root, page);
+  let html = readFileSync(path, 'utf8');
+  if (!html.includes('cloudflareinsights.com/beacon')) {
+    html = html.replace(/<\/body>/i, `    ${BEACON}\n  </body>`);
+    writeFileSync(path, html);
+  }
+}
+
 console.log('SEO head build done.');

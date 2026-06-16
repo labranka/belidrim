@@ -289,6 +289,13 @@ main:has(.slider) .section {
   filter: brightness(0) invert(1);
   transition: filter 0.25s ease;
 }
+/* Hover: tint just the logo to the accent gold (filter only affects the image,
+   not the navbar background). */
+.navbar__logo:hover img,
+.navbar__logo:focus-visible img {
+  filter: brightness(0) saturate(100%) invert(73%) sepia(53%) saturate(1015%)
+    hue-rotate(351deg) brightness(99%) contrast(94%);
+}
 
 .navbar__container {
   max-width: var(--container);

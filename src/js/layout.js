@@ -69,6 +69,17 @@ function renderHeader() {
   </nav>`;
 }
 
+// Author credit shown in the footer corner. Renders a link only when a URL is
+// set in site.config (credit.url), so we never publish a broken/placeholder
+// link; until then the name shows as styled plain text.
+function renderCredit() {
+  const credit = site.credit || {};
+  const name = credit.name || 'labranka';
+  return credit.url
+    ? `<a href="${credit.url}" class="footer__credit-link" target="_blank" rel="noopener">${name}</a>`
+    : `<span class="footer__credit-link">${name}</span>`;
+}
+
 function renderFooter() {
   const year = new Date().getFullYear();
   const quickLinks = NAV_ITEMS.map(
@@ -118,6 +129,9 @@ function renderFooter() {
 
     <div class="footer__bottom">
       <p>© ${year} ${site.companyLegal}. <span data-i18n="footer.rights"></span></p>
+      <p class="footer__credit">
+        <span data-i18n="footer.madeBy"></span> ${renderCredit()}
+      </p>
     </div>
   </footer>`;
 }

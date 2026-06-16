@@ -28,6 +28,14 @@ export const site = {
     instagram: '', // [PLACEHOLDER]
   },
 
+  // Site author credit shown in the footer corner. Paste the Instagram (or
+  // portfolio) URL into `url` to turn the name into a clickable link; while it
+  // stays '' the name shows as plain text (no broken link).
+  credit: {
+    name: 'labranka',
+    url: 'https://www.instagram.com/labranka.builds', // Instagram @labranka.builds
+  },
+
   // Web3Forms access key (free): create one at https://web3forms.com using your email.
   // Until you paste a real key, form submissions will show an error.
   web3formsKey: 'YOUR_WEB3FORMS_ACCESS_KEY', // [PLACEHOLDER]

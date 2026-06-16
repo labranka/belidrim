@@ -22,7 +22,7 @@ export const translations = {
     // --- Hero (home) ---
     'hero.tagline': 'Transport bez stresa',
     'hero.subtitle':
-      'Pouzdan i siguran prevoz robe u Srbiji i regionu — sopstveni vozni park i dugogodišnje iskustvo.',
+      'Pouzdan i siguran prevoz robe u Srbiji i regionu, sa sopstvenim voznim parkom i dugogodišnjim iskustvom.',
     'hero.ctaPrimary': 'Zatražite ponudu',
     'hero.ctaSecondary': 'Saznajte više o nama',
 
@@ -42,7 +42,7 @@ export const translations = {
     'services.eyebrow': 'Šta radimo',
     'services.title': 'Naše usluge',
     'services.subtitle':
-      'Kompletna logistika za vašu robu — od preuzimanja do isporuke.',
+      'Kompletna logistika za vašu robu, od preuzimanja do isporuke.',
     'services.card1.title': 'Domaći transport',
     'services.card1.text':
       'Brz i pouzdan prevoz robe na teritoriji cele Srbije, uz garantovanu tačnost isporuke.',
@@ -55,7 +55,7 @@ export const translations = {
 
     // --- Home: CTA band ---
     'cta.title': 'Potreban vam je prevoz robe?',
-    'cta.text': 'Javite nam se — naš tim je spreman da vam pruži najbolju uslugu.',
+    'cta.text': 'Javite nam se, naš tim je spreman da vam pruži najbolju uslugu.',
     'cta.button': 'Kontaktirajte nas',
 
     // --- About page ---
@@ -73,7 +73,7 @@ export const translations = {
       'Ukoliko vam je potreban transport robe, ne oklevajte da nas kontaktirate. Naš tim je uvek spreman da vam pruži najbolju moguću uslugu.',
     'about.valuesTitle': 'Zašto baš mi?',
     'about.value1.title': 'Pouzdanost',
-    'about.value1.text': 'Isporuka na vreme, svaki put — bez izgovora.',
+    'about.value1.text': 'Isporuka na vreme, svaki put. Bez izgovora.',
     'about.value2.title': 'Iskustvo',
     'about.value2.text': 'Dugogodišnje iskustvo i tim proverenih vozača.',
     'about.value3.title': 'Sopstveni vozni park',
@@ -104,12 +104,12 @@ export const translations = {
     'contact.eyebrow': 'Kontakt',
     'contact.title': 'Kontaktirajte nas',
     'contact.intro':
-      'Imate pitanje ili vam je potrebna ponuda? Tu smo za vas — javite nam se na bilo koji od načina ispod.',
+      'Imate pitanje ili vam je potrebna ponuda? Tu smo za vas, javite nam se na bilo koji od načina ispod.',
     'contact.phoneLabel': 'Telefon',
     'contact.emailLabel': 'Email',
     'contact.addressLabel': 'Adresa',
     'contact.hoursLabel': 'Radno vreme',
-    'contact.hoursValue': 'Ponedeljak – Petak: 08–16h',
+    'contact.hoursValue': 'Ponedeljak do petka: 08 do 16h',
     'contact.formTitle': 'Pošaljite nam poruku',
 
     // --- Forms ---
@@ -130,6 +130,7 @@ export const translations = {
     'footer.contactTitle': 'Kontakt',
     'footer.followTitle': 'Pratite nas',
     'footer.rights': 'Sva prava zadržana.',
+    'footer.madeBy': 'Izradila',
   },
 
   en: {
@@ -153,7 +154,7 @@ export const translations = {
     // --- Hero (home) ---
     'hero.tagline': 'Stress-free transport',
     'hero.subtitle':
-      'Reliable and safe freight transport in Serbia and the region — our own fleet and years of experience.',
+      'Reliable and safe freight transport in Serbia and the region, with our own fleet and years of experience.',
     'hero.ctaPrimary': 'Request a quote',
     'hero.ctaSecondary': 'Learn more about us',
 
@@ -172,7 +173,7 @@ export const translations = {
     // --- Home: services ---
     'services.eyebrow': 'What we do',
     'services.title': 'Our services',
-    'services.subtitle': 'Complete logistics for your goods — from pickup to delivery.',
+    'services.subtitle': 'Complete logistics for your goods, from pickup to delivery.',
     'services.card1.title': 'Domestic transport',
     'services.card1.text':
       'Fast and reliable transport of goods across Serbia, with guaranteed on-time delivery.',
@@ -185,7 +186,7 @@ export const translations = {
 
     // --- Home: CTA band ---
     'cta.title': 'Need your goods transported?',
-    'cta.text': 'Get in touch — our team is ready to give you the best service.',
+    'cta.text': 'Get in touch, our team is ready to give you the best service.',
     'cta.button': 'Contact us',
 
     // --- About page ---
@@ -203,7 +204,7 @@ export const translations = {
       'If you need goods transported, do not hesitate to contact us. Our team is always ready to provide you with the best possible service.',
     'about.valuesTitle': 'Why choose us?',
     'about.value1.title': 'Reliability',
-    'about.value1.text': 'On-time delivery, every time — no excuses.',
+    'about.value1.text': 'On-time delivery, every time. No excuses.',
     'about.value2.title': 'Experience',
     'about.value2.text': 'Years of experience and a team of proven drivers.',
     'about.value3.title': 'Our own fleet',
@@ -233,12 +234,12 @@ export const translations = {
     'contact.eyebrow': 'Contact',
     'contact.title': 'Contact us',
     'contact.intro':
-      'Have a question or need a quote? We are here for you — reach us any of the ways below.',
+      'Have a question or need a quote? We are here for you, reach us any of the ways below.',
     'contact.phoneLabel': 'Phone',
     'contact.emailLabel': 'Email',
     'contact.addressLabel': 'Address',
     'contact.hoursLabel': 'Working hours',
-    'contact.hoursValue': 'Monday – Friday: 8 am – 4 pm',
+    'contact.hoursValue': 'Monday to Friday: 8 am to 4 pm',
     'contact.formTitle': 'Send us a message',
 
     // --- Forms ---
@@ -258,5 +259,6 @@ export const translations = {
     'footer.contactTitle': 'Contact',
     'footer.followTitle': 'Follow us',
     'footer.rights': 'All rights reserved.',
+    'footer.madeBy': 'Made by',
   },
 };

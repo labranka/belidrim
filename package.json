@@ -6,7 +6,8 @@
   "scripts": {
     "start": "python3 -m http.server 3000",
     "serve": "npx --yes serve@latest -l 3000 .",
-    "optimize:images": "node scripts/optimize-images.mjs"
+    "optimize:images": "node scripts/optimize-images.mjs",
+    "prerender": "node scripts/prerender.mjs"
   },
   "author": "Branka Lakicevic",
   "license": "ISC"

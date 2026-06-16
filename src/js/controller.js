@@ -17,6 +17,7 @@ class Slider {
     this.init();
     this.addEventListeners();
     this.addSwipe();
+    this.startAutoplay();
   }
 
   createDots() {
@@ -38,13 +39,14 @@ class Slider {
     this.root.appendChild(this.live);
   }
 
-  goToSlide(slide) {
+  goToSlide(slide, silent) {
     this.slides.forEach((s, i) => {
       s.style.transform = `translateX(${100 * (i - slide)}%)`;
       // Hide off-screen slides from assistive tech so only the current one reads.
       s.setAttribute('aria-hidden', i === slide ? 'false' : 'true');
     });
-    if (this.live) this.live.textContent = `Slika ${slide + 1} / ${this.maxSlide}`;
+    // Announce only on user navigation, not on every autoplay tick.
+    if (this.live && !silent) this.live.textContent = `Slika ${slide + 1} / ${this.maxSlide}`;
   }
 
   activateDot(slide) {
@@ -57,15 +59,15 @@ class Slider {
     });
   }
 
-  nextSlide() {
+  nextSlide(silent) {
     this.curSlide = this.curSlide === this.maxSlide - 1 ? 0 : this.curSlide + 1;
-    this.goToSlide(this.curSlide);
+    this.goToSlide(this.curSlide, silent);
     this.activateDot(this.curSlide);
   }
 
-  prevSlide() {
+  prevSlide(silent) {
     this.curSlide = this.curSlide === 0 ? this.maxSlide - 1 : this.curSlide - 1;
-    this.goToSlide(this.curSlide);
+    this.goToSlide(this.curSlide, silent);
     this.activateDot(this.curSlide);
   }
 
@@ -75,8 +77,14 @@ class Slider {
   }
 
   addEventListeners() {
-    this.btnRight?.addEventListener('click', () => this.nextSlide());
-    this.btnLeft?.addEventListener('click', () => this.prevSlide());
+    this.btnRight?.addEventListener('click', () => {
+      this.nextSlide();
+      this.resetAutoplay?.();
+    });
+    this.btnLeft?.addEventListener('click', () => {
+      this.prevSlide();
+      this.resetAutoplay?.();
+    });
 
     // Scope arrow keys to the slider (it is focusable via tabindex="0") so they
     // don't hijack page scrolling or form-field caret movement elsewhere.
@@ -84,9 +92,11 @@ class Slider {
       if (e.key === 'ArrowLeft') {
         e.preventDefault();
         this.prevSlide();
+        this.resetAutoplay?.();
       } else if (e.key === 'ArrowRight') {
         e.preventDefault();
         this.nextSlide();
+        this.resetAutoplay?.();
       }
     });
 
@@ -97,6 +107,7 @@ class Slider {
       this.curSlide = slide;
       this.goToSlide(slide);
       this.activateDot(slide);
+      this.resetAutoplay?.();
     });
   }
 
@@ -129,10 +140,29 @@ class Slider {
       if (Math.abs(dx) > THRESHOLD && Math.abs(dx) > Math.abs(dy)) {
         if (dx < 0) this.nextSlide();
         else this.prevSlide();
+        this.resetAutoplay?.();
       }
     });
 
     this.viewport.addEventListener('pointercancel', () => (dragging = false));
+  }
+
+  // Auto-advance the carousel. Pauses on hover and while focused, resets after
+  // any manual navigation, and is fully disabled under prefers-reduced-motion.
+  startAutoplay() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const INTERVAL = 4500;
+    const stop = () => window.clearInterval(this.timer);
+    const start = () => {
+      stop(); // never run two intervals at once
+      this.timer = window.setInterval(() => this.nextSlide(true), INTERVAL);
+    };
+    this.resetAutoplay = start;
+    start();
+    this.root.addEventListener('mouseenter', stop);
+    this.root.addEventListener('mouseleave', start);
+    this.root.addEventListener('focusin', stop);
+    this.root.addEventListener('focusout', start);
   }
 }
 

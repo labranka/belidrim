@@ -142,6 +142,15 @@ p {
   padding: 3.5rem 0;
 }
 
+/* Gallery page only (the single page that has a .slider): tighter hero and a
+   smaller gap above the carousel so it is visible without scrolling. */
+main:has(.slider) .page-hero {
+  padding: calc(var(--header-h) + 1.5rem) 1.25rem 1.5rem;
+}
+main:has(.slider) .section {
+  padding-top: 1rem;
+}
+
 .section--soft {
   background: var(--bg-soft);
 }

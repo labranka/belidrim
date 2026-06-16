@@ -1142,17 +1142,19 @@ a.footer__credit-link:focus-visible {
 
 /* ============================================================================
    App-shell load fade
-   The page is assembled by JS (navbar/footer injected, text filled by i18n),
-   which would otherwise be visible as pop-in + reflow on every navigation. So
-   we keep the body hidden while it's assembled, then fade the finished page in
-   as one piece — no visible movement. Gated behind .is-loading (added by an
-   inline <head> script, JS-only) so content always shows without JS, and the
-   inline script skips it under reduced motion.
+   Body content is server-rendered (text is pre-rendered, sections are static),
+   so only the JS-injected navbar + footer pop in. We fade ONLY those two
+   regions in once assembled and leave the hero/content to paint immediately
+   (so the LCP element is never gated behind JS). Gated behind .is-loading
+   (added by an inline <head> script, JS-only) so content always shows without
+   JS, and the inline script skips it under reduced motion.
    ========================================================================== */
-html.is-loading body {
+html.is-loading #site-header,
+html.is-loading #site-footer {
   opacity: 0;
 }
-html.is-ready body {
+html.is-ready #site-header,
+html.is-ready #site-footer {
   opacity: 1;
   transition: opacity 0.4s ease;
 }

@@ -3,6 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      // GitHub Pages serves this 404 for trailing-slash paths (e.g. /about-us/).
+      // Bounce them to the canonical no-slash URL the sitemap uses.
+      (function () {
+        var p = location.pathname;
+        if (p.length > 1 && p.charAt(p.length - 1) === '/')
+          location.replace(p.replace(/\/+$/, '') + location.search + location.hash);
+      })();
+    </script>
     <title>404 | Beli Drim</title>
     <meta name="description" content="Stranica nije pronađena. Beli Drim." />
     <meta name="robots" content="noindex" />
@@ -20,8 +29,8 @@
       rel="stylesheet"
     />
     <script>(function(){if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;var d=document.documentElement;d.classList.add("is-loading");setTimeout(function(){d.classList.remove("is-loading");d.classList.add("is-ready")},800)})();</script>
-    <link rel="stylesheet" href="src/css/style.css?v=2.1.17" />
-    <script type="module" src="src/js/main.js?v=2.1.17"></script>
+    <link rel="stylesheet" href="src/css/style.css?v=2.1.18" />
+    <script type="module" src="src/js/main.js?v=2.1.18"></script>
   </head>
   <body>
     <header id="site-header"></header>

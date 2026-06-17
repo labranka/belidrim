@@ -359,6 +359,11 @@ main:has(.slider) .section {
 .navbar__menu.is-open {
   transform: translateX(0);
 }
+/* The panel is focused on open (a11y) but should not draw a ring on itself. */
+.navbar__menu:focus,
+.navbar__menu:focus-visible {
+  outline: none;
+}
 
 .navbar__nav {
   display: flex;

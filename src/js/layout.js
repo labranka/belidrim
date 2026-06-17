@@ -60,7 +60,7 @@ function renderHeader() {
         <span class="bar"></span><span class="bar"></span><span class="bar"></span>
       </button>
 
-      <div class="navbar__menu" id="primary-menu">
+      <div class="navbar__menu" id="primary-menu" tabindex="-1">
         <ul class="navbar__nav">${links}</ul>
         <div class="navbar__actions">
           <div class="lang-switch" role="group" data-i18n-aria="lang.toggleLabel">
@@ -169,7 +169,10 @@ function initMobileMenu() {
 
     if (open) {
       lastFocused = document.activeElement;
-      menu.querySelector('a, button')?.focus();
+      // Focus the menu panel itself (not the first link) so opening on touch
+      // doesn't draw a focus ring around the first item; keyboard users still
+      // Tab into the links from here.
+      menu.focus({ preventScroll: true });
     } else if (lastFocused) {
       lastFocused.focus();
       lastFocused = null;

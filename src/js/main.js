@@ -26,9 +26,9 @@ function start() {
   initForms(); // contact / careers forms (no-op when absent)
   initReveal(); // hide below-the-fold blocks (after layout is final) for scroll-in
 
-  // The page is fully assembled — fade it in as one piece (the inline <head>
-  // script hid it via .is-loading). Two frames so the first painted state is
-  // the hidden one, guaranteeing the opacity transition runs.
+  // The footer is the only JS-injected region left (the inline <head> script
+  // hid it via .is-loading); fade it in once assembled. Two frames so the first
+  // painted state is the hidden one, guaranteeing the opacity transition runs.
   const root = document.documentElement;
   requestAnimationFrame(() =>
     requestAnimationFrame(() => {

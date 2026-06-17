@@ -50,12 +50,45 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;600;700&display=optional" media="print" onload="this.media='all'" />
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;600;700&display=optional" /></noscript>
     <script>(function(){if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;var d=document.documentElement;d.classList.add("is-loading");setTimeout(function(){d.classList.remove("is-loading");d.classList.add("is-ready")},800)})();</script>
-    <link rel="stylesheet" href="src/css/style.css?v=2.1.20" />
-    <script type="module" src="src/js/main.js?v=2.1.20"></script>
+    <link rel="stylesheet" href="src/css/style.css?v=2.1.21" />
+    <script type="module" src="src/js/main.js?v=2.1.21"></script>
       <script type="application/ld+json" id="ld-localbusiness">{"@context":"https://schema.org","@graph":[{"@type":"MovingCompany","@id":"https://belidrim.rs/#localbusiness","name":"Beli Drim","legalName":"Beli Drim 2014 DOO","url":"https://belidrim.rs/","logo":"https://belidrim.rs/src/img/icon-512.png","image":"https://belidrim.rs/src/img/highway.jpg","telephone":"+381 65 3753999","email":"info@belidrim.rs","taxID":"108470583","foundingDate":"2014-01-01","priceRange":"€€","address":{"@type":"PostalAddress","streetAddress":"IV Crnogorska 30g","addressLocality":"Kraljevo","addressRegion":"Raški okrug","postalCode":"36000","addressCountry":"RS"},"geo":{"@type":"GeoCoordinates","latitude":43.726,"longitude":20.689},"hasMap":"https://www.google.com/maps?q=IV+Crnogorska+30g,+Kraljevo,+Srbija","areaServed":[{"@type":"City","name":"Kraljevo"},{"@type":"City","name":"Kragujevac"},{"@type":"City","name":"Čačak"},{"@type":"City","name":"Vrnjačka Banja"},{"@type":"AdministrativeArea","name":"Raški okrug"},{"@type":"Country","name":"Serbia"}],"openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"08:00","closes":"16:00"},"contactPoint":{"@type":"ContactPoint","telephone":"+381653753999","contactType":"customer service","areaServed":"RS","availableLanguage":["Serbian","English"]}},{"@type":"WebSite","@id":"https://belidrim.rs/#website","url":"https://belidrim.rs/","name":"Beli Drim","inLanguage":"sr-RS","publisher":{"@id":"https://belidrim.rs/#localbusiness"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Početna","item":"https://belidrim.rs/"},{"@type":"ListItem","position":2,"name":"Kontakt","item":"https://belidrim.rs/kontakt"}]}]}</script>
   </head>
   <body>
-    <header id="site-header"></header>
+    <header id="site-header">
+  <a href="#main" class="skip-link" data-i18n="a11y.skip">Pređi na sadržaj</a>
+  <nav class="navbar" aria-label="Beli Drim">
+    <div class="navbar__container">
+      <a href="/" class="navbar__logo" aria-label="Beli Drim">
+        <img src="src/img/logoBD.svg" alt="" width="120" height="40" />
+      </a>
+
+      <button class="navbar__toggle" id="mobile-menu" aria-label="Meni" aria-expanded="false" aria-controls="primary-menu">
+        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+      </button>
+
+      <div class="navbar__menu" id="primary-menu" tabindex="-1">
+        <ul class="navbar__nav"><li class="navbar__item">
+        <a href="/" class="navbar__link" data-i18n="nav.home">Početna</a>
+      </li><li class="navbar__item">
+        <a href="about-us" class="navbar__link" data-i18n="nav.about">O nama</a>
+      </li><li class="navbar__item">
+        <a href="gallery" class="navbar__link" data-i18n="nav.gallery">Galerija</a>
+      </li><li class="navbar__item">
+        <a href="zaposlenje" class="navbar__link" data-i18n="nav.careers">Zaposlenje</a>
+      </li><li class="navbar__item">
+        <a href="kontakt" class="navbar__link is-active" data-i18n="nav.contact" aria-current="page">Kontakt</a>
+      </li></ul>
+        <div class="navbar__actions">
+          <div class="lang-switch" role="group" data-i18n-aria="lang.toggleLabel">
+            <button type="button" class="lang-switch__btn" data-lang-option="sr">SR</button>
+            <button type="button" class="lang-switch__btn" data-lang-option="en">EN</button>
+          </div>
+          <a href="kontakt" class="btn btn--accent navbar__cta" data-i18n="nav.cta">Zatražite ponudu</a>
+        </div>
+      </div>
+    </div>
+  </nav></header>
 
     <main id="main">
       <section class="page-hero">

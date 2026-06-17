@@ -1147,18 +1147,17 @@ a.footer__credit-link:focus-visible {
 
 /* ============================================================================
    App-shell load fade
-   Body content is server-rendered (text is pre-rendered, sections are static),
-   so only the JS-injected navbar + footer pop in. We fade ONLY those two
-   regions in once assembled and leave the hero/content to paint immediately
-   (so the LCP element is never gated behind JS). Gated behind .is-loading
-   (added by an inline <head> script, JS-only) so content always shows without
-   JS, and the inline script skips it under reduced motion.
+   Body content and the navbar are pre-rendered into static HTML, so they paint
+   immediately. Only the footer is still JS-injected, so it's the one thing that
+   would pop in — we fade just it once assembled. It sits below the fold, so the
+   fade is effectively invisible but keeps the load tidy if someone scrolls fast.
+   Gated behind .is-loading (added by an inline <head> script, JS-only) so the
+   footer always shows without JS, and the inline script skips it under reduced
+   motion.
    ========================================================================== */
-html.is-loading #site-header,
 html.is-loading #site-footer {
   opacity: 0;
 }
-html.is-ready #site-header,
 html.is-ready #site-footer {
   opacity: 1;
   transition: opacity 0.4s ease;
@@ -1196,6 +1195,38 @@ html.is-ready #site-footer {
 }
 
 /* ============================================================================
+   Page transitions (cross-document View Transitions)
+   A subtle cross-fade when navigating between our pages. Pure CSS, no JS, no
+   artificial delay: supporting browsers fade, everywhere else navigation stays
+   instant as before. Same-origin only, so external links (FB/IG/tel/mailto)
+   are unaffected. The navbar is in static HTML, so it's present in both the old
+   and new page snapshots and never blinks during the cross-fade — no JS handshake
+   needed. (The footer is JS-injected but sits below the fold.) Disabled under
+   reduced motion in the block below.
+   ========================================================================== */
+@view-transition {
+  navigation: auto;
+}
+
+@keyframes bd-page-out {
+  to {
+    opacity: 0;
+  }
+}
+@keyframes bd-page-in {
+  from {
+    opacity: 0;
+  }
+}
+
+::view-transition-old(root) {
+  animation: bd-page-out 240ms ease-in both;
+}
+::view-transition-new(root) {
+  animation: bd-page-in 420ms ease-out both;
+}
+
+/* ============================================================================
    Reduced motion
    ========================================================================== */
 @media (prefers-reduced-motion: reduce) {
@@ -1208,6 +1239,12 @@ html.is-ready #site-footer {
   [data-reveal] {
     opacity: 1 !important;
     transform: none !important;
+  }
+  /* Kill the cross-page fade too — the `*` rule above can't reach these
+     view-transition pseudo-elements, so the swap would otherwise still fade. */
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
   }
 }
 

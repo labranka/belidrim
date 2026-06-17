@@ -35,8 +35,12 @@ function currentFile() {
   return file && file.length ? file : 'index';
 }
 
-function renderHeader() {
-  const active = currentFile();
+// Pure builder for the navbar markup given the active page slug. Shared by the
+// browser (renderHeader) AND the prerender build, so the static HTML and the
+// runtime fallback never drift. data-i18n leaves are left empty here: the build
+// fills the Serbian text into the static document, i18n.js fills them at runtime
+// (identical for SR, translated for EN).
+export function headerMarkup(active) {
   const links = NAV_ITEMS.map(
     (item) =>
       `<li class="navbar__item">
@@ -72,6 +76,10 @@ function renderHeader() {
       </div>
     </div>
   </nav>`;
+}
+
+function renderHeader() {
+  return headerMarkup(currentFile());
 }
 
 // Author credit shown in the footer corner. Renders a link only when a URL is
@@ -276,7 +284,13 @@ function injectStructuredData() {
 export function renderLayout() {
   const header = document.querySelector('#site-header');
   const footer = document.querySelector('#site-footer');
-  if (header) header.innerHTML = renderHeader();
+  // The navbar is pre-rendered into the static <header> by the build, so it
+  // paints with the first frame instead of waiting for JS. Only inject it as a
+  // fallback when the placeholder is empty (e.g. running in dev before the
+  // prerender step). Behavior (mobile menu, scroll state) is wired below either
+  // way. The footer stays JS-injected — it's below the fold, so its load-in is
+  // never visible.
+  if (header && !header.children.length) header.innerHTML = renderHeader();
   if (footer) footer.innerHTML = renderFooter();
   initMobileMenu();
   initNavScroll();

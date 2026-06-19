@@ -8,7 +8,7 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { translations } from '../src/js/translations.js';
-import { headerMarkup } from '../src/js/layout.js';
+import { headerMarkup, footerMarkup } from '../src/js/layout.js';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const sr = translations.sr;
@@ -53,6 +53,26 @@ for (const page of PAGES) {
   if (!navInjected) {
     throw new Error(
       `${page}: <header id="site-header"> not found — navbar NOT pre-rendered. Check the placeholder tag.`
+    );
+  }
+
+  // Pre-render the footer into the static <footer> too, so the full legal name
+  // (Beli Drim 2014 DOO), NAP and company IDs ship in the crawlable HTML on the
+  // first non-JS pass — not just after layout.js runs. The match is GREEDY to the
+  // last </footer> so a re-run replaces the inner footer.footer cleanly instead of
+  // stopping at its close tag (which would leave the outer placeholder dangling).
+  const foot = footerMarkup(new Date().getFullYear());
+  let footInjected = false;
+  html = html.replace(
+    /(<footer\b[^>]*\bid=["']site-footer["'][^>]*>)[\s\S]*(<\/footer>)/i,
+    (_m, open, close) => {
+      footInjected = true;
+      return `${open}${foot}${close}`;
+    }
+  );
+  if (!footInjected) {
+    throw new Error(
+      `${page}: <footer id="site-footer"> not found — footer NOT pre-rendered. Check the placeholder tag.`
     );
   }
 

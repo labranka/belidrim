@@ -93,8 +93,12 @@ function renderCredit() {
     : `<span class="footer__credit-link">${name}</span>`;
 }
 
-function renderFooter() {
-  const year = new Date().getFullYear();
+// Pure builder for the footer markup, shared by the browser (renderFooter) AND
+// the prerender build — same reasoning as headerMarkup(). Pre-rendering it puts
+// the full legal name (Beli Drim 2014 DOO), NAP and company IDs into the static
+// HTML, so crawlers that don't run JS still see them. `year` is passed in so the
+// function stays pure (no Date) and reusable from the Node build.
+export function footerMarkup(year) {
   const quickLinks = NAV_ITEMS.map(
     (item) => `<li><a href="${item.href}" data-i18n="${item.key}"></a></li>`
   ).join('');
@@ -158,6 +162,10 @@ function renderFooter() {
       </p>
     </div>
   </footer>`;
+}
+
+function renderFooter() {
+  return footerMarkup(new Date().getFullYear());
 }
 
 function initMobileMenu() {

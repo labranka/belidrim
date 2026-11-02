@@ -7,6 +7,10 @@
 // Targets are tagged with [data-reveal] from JS, and the hidden state lives
 // behind the .reveal-ready class on <html> — added only here. So with JS
 // disabled or under prefers-reduced-motion, nothing is ever hidden.
+//
+// initReveal() runs once per page content: on the first load and again after
+// every soft navigation (navigation.js swaps <main>), so it tears down the
+// previous observer before tagging the new content.
 
 // Block-level elements that fade in as a single unit.
 const BLOCK_SELECTORS = [
@@ -29,6 +33,7 @@ const GROUP_SELECTORS = ['.stats', '.services__grid', '.values__grid', '.positio
 
 const targets = [];
 let observer = null;
+let pageshowBound = false;
 
 // Only manage elements that start below the fold; on-screen ones are shown by
 // the app-shell fade. Measured here (after i18n has filled text, so layout is
@@ -62,6 +67,12 @@ function onIntersect(entries) {
 }
 
 export function initReveal() {
+  // Reset whatever the previous page set up (soft navigation re-runs this).
+  if (observer) observer.disconnect();
+  observer = null;
+  targets.length = 0;
+  document.documentElement.classList.remove('reveal-ready');
+
   // Honour the user's motion preference — leave everything visible.
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
@@ -99,6 +110,9 @@ export function initReveal() {
 
   // Back/forward navigation restores the page from the bfcache without
   // re-running this module, so replay the reveal whenever that happens.
+  // Bound once; it always works on the current targets/observer.
+  if (pageshowBound) return;
+  pageshowBound = true;
   window.addEventListener('pageshow', (e) => {
     if (!e.persisted || !observer) return;
     targets.forEach((el) => {

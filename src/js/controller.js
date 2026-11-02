@@ -164,9 +164,22 @@ class Slider {
     this.root.addEventListener('focusin', stop);
     this.root.addEventListener('focusout', start);
   }
+
+  // Stop the autoplay timer. The DOM listeners go away with the slider's
+  // markup when the page content is swapped out, but an interval would not.
+  destroy() {
+    window.clearInterval(this.timer);
+    this.resetAutoplay = null;
+  }
 }
 
+let active = null;
+
+// Safe to call on every page content (first load and each soft navigation):
+// tears down the previous slider, starts one only if the new page has it.
 export function initSlider() {
+  if (active) active.destroy();
+  active = null;
   const root = document.querySelector('.slider');
-  if (root && root.querySelectorAll('.slide').length) new Slider(root);
+  if (root && root.querySelectorAll('.slide').length) active = new Slider(root);
 }

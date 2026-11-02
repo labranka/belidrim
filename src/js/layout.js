@@ -28,11 +28,28 @@ const ICONS = {
     '<svg viewBox="0 0 24 24" aria-hidden="true" width="22" height="22"><path fill="currentColor" d="M12 2.2c3.2 0 3.6 0 4.8.07 1.2.05 1.8.25 2.2.42.6.2 1 .5 1.4 1 .5.4.8.8 1 1.4.2.4.4 1 .4 2.2.1 1.2.1 1.6.1 4.7s0 3.6-.1 4.8c0 1.2-.2 1.8-.4 2.2-.2.6-.5 1-1 1.4-.4.5-.8.8-1.4 1-.4.2-1 .4-2.2.4-1.2.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-1.2 0-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-1-.5-.4-.8-.8-1-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8c0-1.2.2-1.8.4-2.2.2-.6.5-1 1-1.4.4-.5.8-.8 1.4-1 .4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2Zm0 1.8c-3.1 0-3.5 0-4.7.07-1.1.05-1.7.24-2.1.4-.5.2-.9.44-1.3.84-.4.4-.64.8-.84 1.3-.16.4-.35 1-.4 2.1C2.6 9.5 2.6 9.9 2.6 13s0 3.5.07 4.7c.05 1.1.24 1.7.4 2.1.2.5.44.9.84 1.3.4.4.8.64 1.3.84.4.16 1 .35 2.1.4 1.2.07 1.6.07 4.7.07s3.5 0 4.7-.07c1.1-.05 1.7-.24 2.1-.4.5-.2.9-.44 1.3-.84.4-.4.64-.8.84-1.3.16-.4.35-1 .4-2.1.07-1.2.07-1.6.07-4.7s0-3.5-.07-4.7c-.05-1.1-.24-1.7-.4-2.1a3.5 3.5 0 0 0-.84-1.3 3.5 3.5 0 0 0-1.3-.84c-.4-.16-1-.35-2.1-.4C15.5 4 15.1 4 12 4Zm0 3.1a4.9 4.9 0 1 1 0 9.8 4.9 4.9 0 0 1 0-9.8Zm0 8.1a3.2 3.2 0 1 0 0-6.4 3.2 3.2 0 0 0 0 6.4Zm6.2-8.3a1.15 1.15 0 1 1-2.3 0 1.15 1.15 0 0 1 2.3 0Z"/></svg>',
 };
 
-function currentFile() {
-  // Normalise the path to a slug: strip any .html so /about-us and
-  // /about-us.html both match, and treat the root '/' as 'index'.
-  const file = location.pathname.split('/').pop().replace(/\.html$/, '');
+// Normalise a path to a page slug: strip any .html so /about-us and
+// /about-us.html both match, and treat the root '/' as 'index'.
+export function slugFromPath(pathname) {
+  const file = pathname.split('/').pop().replace(/\.html$/, '');
   return file && file.length ? file : 'index';
+}
+
+function currentFile() {
+  return slugFromPath(location.pathname);
+}
+
+// Flag the navbar link for `active` (a page slug) and clear the others. Used
+// after a soft navigation, when the navbar stays in the DOM but the page
+// underneath it changed.
+export function setActiveNav(active) {
+  document.querySelectorAll('.navbar__link').forEach((link) => {
+    const item = NAV_ITEMS.find((i) => i.href === link.getAttribute('href'));
+    const isActive = !!item && item.match === active;
+    link.classList.toggle('is-active', isActive);
+    if (isActive) link.setAttribute('aria-current', 'page');
+    else link.removeAttribute('aria-current');
+  });
 }
 
 // Pure builder for the navbar markup given the active page slug. Shared by the
@@ -230,12 +247,20 @@ function initMobileMenu() {
 }
 
 // Make the transparent navbar turn solid once the user scrolls past the top.
+let navScrollUpdate = null;
 function initNavScroll() {
   const navbar = document.querySelector('.navbar');
   if (!navbar) return;
-  const update = () => navbar.classList.toggle('is-scrolled', window.scrollY > 30);
-  update();
-  window.addEventListener('scroll', update, { passive: true });
+  navScrollUpdate = () =>
+    navbar.classList.toggle('is-scrolled', window.scrollY > 30);
+  navScrollUpdate();
+  window.addEventListener('scroll', navScrollUpdate, { passive: true });
+}
+
+// Re-evaluate the solid/transparent state right now (a soft navigation jumps
+// the scroll position without waiting for the next scroll event).
+export function syncNavScroll() {
+  if (navScrollUpdate) navScrollUpdate();
 }
 
 // Inject LocalBusiness/MovingCompany JSON-LD built from site.config (the single
@@ -296,8 +321,9 @@ export function renderLayout() {
   // paints with the first frame instead of waiting for JS. Only inject it as a
   // fallback when the placeholder is empty (e.g. running in dev before the
   // prerender step). Behavior (mobile menu, scroll state) is wired below either
-  // way. The footer stays JS-injected — it's below the fold, so its load-in is
-  // never visible.
+  // way. The footer is re-rendered once here (keeps the copyright year live);
+  // it's below the fold, so its load-in is never visible. Both then stay in
+  // the DOM across soft navigations (navigation.js only swaps <main>).
   if (header && !header.children.length) header.innerHTML = renderHeader();
   if (footer) footer.innerHTML = renderFooter();
   initMobileMenu();

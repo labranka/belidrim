@@ -41,6 +41,23 @@ Until a real key is set, the forms will show an error on submit.
 The contact-page map needs **no API key**. Just set `mapQuery` in
 `src/js/site.config.js` to your address (e.g. `"Kralja Petra 1, Beograd, Srbija"`).
 
+## Navigation & page transitions
+Moving between pages feels like one page: internal links are fetched in the
+background, only the `<main>` content is swapped and the URL is updated, so the
+navbar and footer never reload and nothing flashes. The swap is animated with
+the View Transitions API where the browser supports it and with a plain fade
+elsewhere; under "reduce motion" it is instant. Pages are prefetched on hover /
+touch (and quietly after load) so clicks are instant.
+
+- This is all in `src/js/navigation.js`. Anything unexpected (offline, 404,
+  non-HTML) falls back to a normal full page load.
+- Every page module is re-initialised after a swap (see `initPage()` in
+  `src/js/main.js`). If you add a new page script, call it from there and make
+  sure it can run more than once.
+- Add `data-no-swap` to a link to force a normal full page load for it.
+- The transition timing lives in the "Page transitions" block of
+  `src/css/style.css`.
+
 ## Preview locally
 The site uses ES modules, so it must be opened through a small web server
 (not by double-clicking the file). From this folder run either:
@@ -60,6 +77,7 @@ src/js/
   site.config.js         — YOUR business details (edit this)
   translations.js        — all SR/EN text (edit this)
   layout.js              — shared navbar + footer
+  navigation.js          — soft navigation + page transitions
   i18n.js                — language toggle engine
   contact.js             — contact info + map
   forms.js               — form submission (Web3Forms)
@@ -92,3 +110,8 @@ real number is set).
 ## Hosting
 Deployed with **GitHub Pages** — pushing to the `main` branch publishes the site.
 The custom `404.html` is served automatically for unknown URLs.
+
+## Cache busting
+`style.css` and `main.js` are referenced with a `?v=` query (the version in
+`package.json`). Bump it in `package.json` **and** in every page `<head>` after
+changing CSS or JS, or returning visitors may keep the old files for a while.
